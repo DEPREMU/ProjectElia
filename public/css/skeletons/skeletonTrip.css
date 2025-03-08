@@ -1,0 +1,79 @@
+@keyframes skeleton {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.skeleton {
+  background-color: var(--surface-variant);
+  border-radius: 4px;
+  margin-bottom: 10px;
+  overflow: hidden;
+}
+
+.skeleton::before {
+  content: "";
+  display: block;
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.1),
+    transparent
+  );
+  animation: skeleton 1.5s infinite;
+}
+
+.skeleton-text {
+  height: 25px;
+  width: 100%;
+}
+
+.skeleton-title {
+  height: 40px;
+  width: 40%;
+}
+
+.skeleton-image {
+  height: 300px;
+  width: 100%;
+}
+
+.skeleton-map {
+  height: 300px;
+  width: 100%;
+  height: 100vh;
+}
+
+.skeleton-small {
+  height: 20px;
+  width: 30%;
+}
+
+.skeleton-dates {
+  width: 50%;
+  height: 20px;
+}
+
+.skeleton-carrusel-imgs {
+  gap: 10px;
+  min-height: 100px;
+  min-width: 100px;
+}
+
+.skeleton-carrusel {
+  display: flex;
+  overflow-x: hidden;
+  scroll-snap-type: x mandatory;
+  gap: 12px;
+  padding: 12px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--primary) var(--surface);
+}

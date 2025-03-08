@@ -1,0 +1,24 @@
+:root {
+  --primary: #304f84;
+  --on-primary: #edbbcd;
+  --primary-container: #1a253d;
+  --on-primary-container: #edbbcd;
+  --secondary: #58446d;
+  --on-secondary: #edbbcd;
+  --secondary-container: #694e8d;
+  --on-secondary-container: #edbbcd;
+  --background: #1a253d;
+  --on-background: #edbbcd;
+  --surface: #1a253d;
+  --on-surface: #edbbcd;
+  --error: #cf6679;
+  --on-error: #1a253d;
+  --on-error-hover: #b55663;
+  --surface-variant: #58446d;
+  --on-surface-variant: #edbbcd;
+  --outline: #694e8d;
+  --font-family: "Roboto", sans-serif;
+  --logo-size: 75px;
+  --animation-duration: 0.5s;
+  --animation-translateY: -29px;
+}

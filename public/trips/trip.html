@@ -1,0 +1,92 @@
+<div class="information" id="information">
+  <div class="tripCard" id="tripCard">
+    <div class="tripHeader">
+      <img
+        src="{{mainImage}}"
+        alt="{{destination}}"
+        class="mainImage"
+        id="mainImage"
+        loading="eager"
+      />
+      <div id="carrusel" class="carrusel">{{carruselImages}}</div>
+    </div>
+
+    <div class="tripBody">
+      <h1 class="destinationTitle">{{destination}}</h1>
+      <p class="continent">{{continent}}</p>
+
+      <div class="dates">
+        <p>
+          <span class="label">Fecha de inicio: </span>
+          <span class="value">{{startDate}}</span>
+        </p>
+        <p>
+          <span class="label">Fecha de fin: </span>
+          <span class="value">{{endDate}}</span>
+        </p>
+      </div>
+
+      <div class="tripDetails">
+        <p>
+          <span class="label">Presupuesto: </span>
+          <span class="value">{{budget}}</span>
+        </p>
+        <p>
+          <span class="label">Tipo de viaje: </span>
+          <span class="value">{{travelType}}</span>
+        </p>
+        <p>
+          <span class="label">Alojamiento: </span>
+          <span class="value">{{accommodation}}</span>
+        </p>
+        <p>
+          <span class="label">Clima: </span>
+          <span class="value">{{climate}}</span>
+        </p>
+        <p>
+          <span class="label">Mejor temporada para viajar: </span>
+          <span class="value">{{season}}</span>
+        </p>
+        <p>
+          <span class="label">Calificación: </span>
+          <span class="value">{{rating}}/5</span>
+        </p>
+      </div>
+
+      <div class="thingsToDo">
+        <h2>Actividades recomendadas</h2>
+        <ul>
+          {{thingsToDo}}
+        </ul>
+      </div>
+
+      <div class="travelTips">
+        <h2>Consejos de viaje</h2>
+        <h3>Clima</h3>
+        <ul>
+          <li>{{tipsClimate}}</li>
+        </ul>
+        <h3>Generales</h3>
+        <ul>
+          {{tipsGeneral}}
+        </ul>
+      </div>
+
+      <div class="tripNotes">
+        <h2>Opiniones</h2>
+        <p>{{opinions}}</p>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="map" id="containerMap">
+  <iframe
+    width="100%"
+    class="iframeMap"
+    id="iframeMap"
+    loading="lazy"
+    allowfullscreen
+    src="https://www.openstreetmap.org/export/embed.html?bbox={{lon}}%2C{{lat}}%2C{{lon}}%2C{{lat}}&layer=mapnik&marker={{lat}},{{lon}}"
+  >
+  </iframe>
+</div>

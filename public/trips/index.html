@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+    <link rel="stylesheet" href="css/common/colors.css" />
+    <link rel="stylesheet" href="css/skeletons/skeletonTrip.css" />
+    <link rel="stylesheet" href="css/trip.css" />
+  </head>
+  <body>
+    <nav class="navBar">
+      <a href="/" class="logo">
+        <img src="assets/logo.png" alt="logo" class="logoImage" />
+        Perfect Destination
+      </a>
+    </nav>
+    <main id="loaded" class="loaded posAbsolute"></main>
+    <main id="loading" class="loading">
+      <div class="information" id="information">
+        <div class="tripCard" id="tripCard">
+          <div class="tripHeader">
+            <div class="skeleton skeleton-image"></div>
+            <div id="carrusel" class="skeleton-carrusel">
+              <div class="skeleton skeleton-carrusel-imgs"></div>
+              <div class="skeleton skeleton-carrusel-imgs"></div>
+              <div class="skeleton skeleton-carrusel-imgs"></div>
+              <div class="skeleton skeleton-carrusel-imgs"></div>
+              <div class="skeleton skeleton-carrusel-imgs"></div>
+            </div>
+          </div>
+
+          <div class="tripBody">
+            <h1 class="destinationTitle skeleton skeleton-title"></h1>
+            <p class="continent skeleton skeleton-small"></p>
+
+            <div class="dates">
+              <p class="skeleton skeleton-dates"></p>
+              <p class="skeleton skeleton-dates"></p>
+            </div>
+
+            <div class="tripDetails">
+              <p class="skeleton skeleton-text"></p>
+              <p class="skeleton skeleton-text"></p>
+              <p class="skeleton skeleton-text"></p>
+              <p class="skeleton skeleton-text"></p>
+              <p class="skeleton skeleton-text"></p>
+              <p class="skeleton skeleton-text"></p>
+            </div>
+
+            <div class="thingsToDo">
+              <h2 class="skeleton skeleton-text"></h2>
+              <ul>
+                <li class="skeleton skeleton-text"></li>
+                <li class="skeleton skeleton-text"></li>
+                <li class="skeleton skeleton-text"></li>
+              </ul>
+            </div>
+
+            <div class="travelTips">
+              <h2 class="skeleton skeleton-text"></h2>
+              <h3 class="skeleton skeleton-text"></h3>
+              <ul>
+                <li class="skeleton skeleton-text"></li>
+              </ul>
+              <h3 class="skeleton skeleton-text"></h3>
+              <ul>
+                <li class="skeleton skeleton-text"></li>
+                <li class="skeleton skeleton-text"></li>
+              </ul>
+            </div>
+
+            <div class="tripNotes">
+              <h2 class="skeleton skeleton-text"></h2>
+              <p class="skeleton skeleton-text"></p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="map" id="containerMap">
+        <div class="skeleton skeleton-map" id="skeletonMap"></div>
+      </div>
+    </main>
+  </body>
+</html>
+<script src="scripts/trips/tripSkeleton.js"></script>
+<script src="scripts/trips/trip.js"></script>
+<script src="scripts/index/index.js"></script>

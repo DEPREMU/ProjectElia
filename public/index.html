@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Trips</title>
+    <link rel="stylesheet" href="css/common/colors.css" />
+    <link rel="stylesheet" href="css/index.css" />
+    <link rel="stylesheet" href="css/skeletons/indexSkeleton.css" />
+  </head>
+  <body>
+    <div class="parent">
+      <nav class="navBar" id="navBar">
+        <button class="logo">
+          <img src="assets/logo.png" alt="logo" class="logoImage" />
+          Perfect Destination
+        </button>
+        <div id="divSearch" class="divSearch">
+          <label for="search" id="labelSearch" class="labelSearch"
+            >Search</label
+          >
+          <input type="text" id="search" class="searchBar" />
+        </div>
+      </nav>
+
+      <div class="mainContainer" id="mainContainer">
+        <button
+          id="btnHideFilterContainer"
+          class="btnHideFilterContainer"
+          style="display: none"
+        >
+          <img
+            src="assets/arrow.png"
+            class="imgHideFilterContainer"
+            alt="show/hide"
+          />
+        </button>
+        <div class="filterContainer" id="filterContainer">
+          <div class="list">
+            <label for="countryCode">Country Code:</label>
+            <input type="text" id="countryCode" name="countryCode" />
+          </div>
+          <div class="list">
+            <label for="startDate">Start Date:</label>
+            <input type="date" id="startDate" name="startDate" />
+          </div>
+
+          <div class="list">
+            <label for="endDate">End Date:</label>
+            <input type="date" id="endDate" name="endDate" />
+          </div>
+
+          <div class="list">
+            <label for="budgetMin">Presupuesto minimo:</label>
+            <input type="number" id="budgetMin" name="budgetMin" />
+          </div>
+
+          <div class="list">
+            <label for="budgetMax">Presupuesto maximo:</label>
+            <input type="number" id="budgetMax" name="budgetMax" />
+          </div>
+
+          <div class="list" id="travelType">
+            <label for="travelType">Tipo de viaje</label>
+            <select name="travelType" id="travelTypeSelect">
+              <option value=""></option>
+              <option value="Solo">Solo</option>
+              <option value="Familiar">Familiar</option>
+              <option value="Negocios">Negocios</option>
+              <option value="Aventura">Aventura</option>
+              <option value="Romántico">Romántico</option>
+              <option value="Otro">Otro</option>
+            </select>
+          </div>
+
+          <div class="list" id="accommodation">
+            <label for="accommodation">Alojamiento</label>
+            <select name="accommodation" id="accommodationSelect">
+              <option value=""></option>
+              <option value="Hotel">Hotel</option>
+              <option value="Hostal">Hostal</option>
+              <option value="Camping">Camping</option>
+              <option value="Airbnb">Airbnb</option>
+              <option value="Otro">Otro</option>
+            </select>
+          </div>
+
+          <div class="list">
+            <label for="rating">Rating:</label>
+            <select name="rating" id="rating">
+              <option value=""></option>
+              <option value="1">1 estrella</option>
+              <option value="2">2 estrellas</option>
+              <option value="3">3 estrellas</option>
+              <option value="4">4 estrellas</option>
+              <option value="5">5 estrellas</option>
+            </select>
+          </div>
+
+          <div class="list">
+            <label for="continent">Continent:</label>
+            <select name="continent" id="continent">
+              <option value=""></option>
+              <option value="Africa">África</option>
+              <option value="Antarctica">Antártida</option>
+              <option value="Asia">Asia</option>
+              <option value="Europe">Europa</option>
+              <option value="North America">América del Norte</option>
+              <option value="Oceania">Oceanía</option>
+              <option value="South America">América del Sur</option>
+            </select>
+          </div>
+        </div>
+        <div
+          class="cardsContainer posAbsolute"
+          id="cardsContainer loaded"
+        ></div>
+        <div class="cardsContainer" id="loading"></div>
+      </div>
+    </div>
+    <script src="scripts/index/listeners.js" defer></script>
+    <script src="scripts/index/index.js"></script>
+  </body>
+</html>

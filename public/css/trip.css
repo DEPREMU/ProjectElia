@@ -1,0 +1,363 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+@keyframes imageLarge {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(5);
+  }
+}
+
+@keyframes imageLargeBW {
+  0% {
+    transform: scale(5);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+.showImageLargeBW,
+.showImageLargeFD {
+  z-index: 10;
+  position: absolute;
+}
+
+.showImageLargeFD {
+  animation: imageLarge 1s ease forwards;
+}
+
+.showImageLargeBW {
+  animation: imageLargeBW 1s ease forwards;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+body {
+  font-family: var(--font-family);
+  background-color: var(--background);
+  color: var(--on-background);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+/* Navbar */
+.navBar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 16px 24px;
+  background-color: var(--primary);
+  width: 100%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.logoImage {
+  width: var(--logo-size);
+  height: var(--logo-size);
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.logo {
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  color: var(--on-primary);
+  font-size: 1.8em;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.logo:hover {
+  color: var(--on-primary-container);
+  transform: scale(1.1);
+}
+
+/* Contenedor principal */
+main {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  margin: 20px;
+  max-width: 1200px;
+  width: 100%;
+  justify-content: center;
+}
+
+.map,
+.information {
+  flex: 1;
+  min-width: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.map {
+  width: 60%;
+}
+
+.information {
+  width: 40%;
+}
+
+/* Imagen principal */
+.mainImage {
+  width: 100%;
+  max-height: 400px;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Tarjeta de viaje */
+.tripCard {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 20px;
+  background: var(--surface);
+  color: var(--on-surface);
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  width: 100%;
+}
+
+.tripCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+}
+
+/* Información del viaje */
+.tripInfo {
+  width: 100%;
+  max-width: 800px;
+  padding: 24px;
+  background: var(--surface-variant);
+  color: var(--on-surface-variant);
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.tripInfo h1 {
+  font-size: 2.2em;
+  text-align: center;
+  margin-bottom: 12px;
+}
+
+.tripInfo .continent {
+  font-size: 1.4em;
+  text-align: center;
+  color: var(--primary);
+  font-weight: bold;
+}
+
+.tripDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.tripDetails p {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px;
+  border-bottom: 1px solid var(--outline);
+}
+
+.tripDetails .label {
+  font-weight: bold;
+  color: var(--secondary);
+}
+
+.tripDetails .value {
+  color: var(--on-secondary);
+}
+
+/* Carrusel de imágenes */
+.carrusel {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  gap: 12px;
+  padding: 12px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--primary) var(--surface);
+}
+
+.carrusel::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.carrusel::-webkit-scrollbar-track {
+  background: var(--surface);
+  border-radius: 10px;
+}
+
+.carrusel::-webkit-scrollbar-thumb {
+  background-color: var(--primary);
+  border-radius: 10px;
+  border: 2px solid var(--surface);
+}
+
+.tripImageCarrusel {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  scroll-snap-align: center;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.tripImageCarrusel:hover {
+  transform: scale(1.15);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Mapa */
+.mapContainer {
+  width: 100%;
+  max-width: 800px;
+  margin-top: 24px;
+}
+
+.fadeOut {
+  animation: fadeOut 0.5s ease forwards;
+}
+
+.z-10 {
+  z-index: 10;
+}
+
+.opacity-0 {
+  opacity: 0;
+}
+
+.z-0 {
+  z-index: 0;
+}
+
+.posAbsolute {
+  position: absolute;
+  top: 110px;
+}
+
+.iframeMap {
+  width: 100%;
+  height: 100vh;
+  border: none;
+  border-radius: 12px;
+}
+
+/* Secciones adicionales */
+.thingsToDo,
+.tripNotes,
+.travelTips {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 24px 0;
+}
+
+ul {
+  padding-left: 20px;
+}
+
+li {
+  margin-bottom: 8px;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  main {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .map,
+  .information {
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .navBar {
+    flex-direction: column;
+    text-align: center;
+    padding: 12px;
+  }
+
+  .logo {
+    font-size: 1.5em;
+  }
+
+  .tripImageCarrusel {
+    width: 80px;
+    height: 80px;
+  }
+
+  .posAbsolute {
+    top: 110px;
+  }
+
+  main {
+    margin: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .logo {
+    font-size: 1.2em;
+  }
+
+  .tripCard {
+    padding: 16px;
+  }
+
+  .posAbsolute {
+    top: 95px;
+  }
+
+  .tripInfo {
+    padding: 16px;
+  }
+
+  main {
+    margin: 8px;
+  }
+  .map,
+  .information {
+    max-width: 95%;
+  }
+}

@@ -1,0 +1,506 @@
+* {
+  box-sizing: border-box;
+}
+
+@keyframes labelAnimationFD {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(var(--animation-translateY));
+  }
+}
+
+@keyframes labelAnimationBW {
+  0% {
+    transform: translateY(var(--animation-translateY));
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes hideFilterContainer {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes showFilterContainer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes rotate0deg {
+  0% {
+    transform: rotate(180deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+@keyframes rotate180deg {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(180deg);
+  }
+}
+
+.btnHideFilterContainer {
+  position: fixed;
+  z-index: 100;
+  top: 430px;
+  left: 0;
+}
+
+.rotate180deg {
+  animation: rotate180deg 1s ease forwards;
+}
+
+.rotate0deg {
+  animation: rotate0deg 1s ease forwards;
+}
+
+.imgHideFilterContainer {
+  width: 20px;
+  height: 20px;
+}
+
+.hidden {
+  display: none;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-family);
+  background-color: var(--background);
+  color: var(--on-background);
+}
+
+/* General container */
+.parent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+/* Navbar */
+.navBar {
+  display: flex;
+  flex: 1;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 24px;
+  background-color: var(--primary);
+  width: 100%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.logoImage {
+  width: var(--logo-size);
+  height: var(--logo-size);
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.logo {
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  width: 50%;
+  max-width: max-content;
+  align-items: center;
+  text-decoration: none;
+  color: var(--on-primary);
+  font-size: 1.8em;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.logo:hover {
+  color: var(--on-primary-container);
+  transform: scale(1.1);
+}
+
+button {
+  background: none;
+  border: none;
+}
+
+.searchBar {
+  display: flex;
+  justify-content: center;
+  flex: 1;
+  align-items: center;
+  padding: 1vw;
+  background-color: var(--primary);
+  flex-direction: row;
+  flex-wrap: wrap;
+  border-radius: 8px;
+  font-size: medium;
+  width: 50%;
+  min-width: 300px;
+
+  overflow-x: scroll;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.searchBar::before {
+  content: "Search";
+  display: block;
+  position: relative;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  width: 100%;
+  height: 100%;
+}
+
+.searchBar:focus {
+  outline: none;
+  border: 2px solid var(--secondary);
+  box-shadow: 0 0 10px var(--secondary);
+}
+
+.labelSearch {
+  position: absolute;
+  background-color: var(--primary);
+  margin: 0 10px;
+  transition: all var(--animation-duration) ease;
+}
+
+label:hover {
+  cursor: text;
+}
+
+.animatedFD {
+  animation: labelAnimationFD var(--animation-duration) ease forwards;
+  background-color: transparent;
+  color: var(--on-primary);
+}
+
+.animatedBW {
+  animation: labelAnimationBW var(--animation-duration) ease forwards;
+}
+
+.divSearch {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  width: 50%;
+  max-width: 400px;
+}
+
+/* Cards */
+.cardsContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.card {
+  width: 400px;
+  height: 600px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  font-family: "Arial", sans-serif;
+  background-color: var(--surface);
+  margin: 20px auto;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  padding: 10px;
+}
+
+.mainContainer {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.card:hover {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  transform: translateY(-5px);
+}
+
+.cardBody {
+  position: relative;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+}
+
+.imgCard {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  max-height: 200px;
+  object-fit: cover;
+  border-bottom: 5px solid var(--outline);
+}
+
+.H2Destination {
+  font-size: 2rem;
+  font-weight: bold;
+  color: var(--on-surface);
+  margin: 15px 0;
+  text-align: center;
+}
+
+.pContinent {
+  font-size: 1.2rem;
+  color: var(--secondary);
+
+  text-align: center;
+}
+
+.fadeOut {
+  animation: fadeOut 0.5s ease forwards;
+}
+
+.z-10 {
+  z-index: 10;
+}
+
+.opacity-0 {
+  opacity: 0;
+}
+
+.z-0 {
+  z-index: 0;
+}
+
+.dates {
+  margin: 15px 0;
+  padding: 0 10px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.pStartDate,
+.pEndDate {
+  display: flex;
+  justify-content: space-between;
+  flex: 1;
+  font-size: 0.9rem;
+  color: var(--on-surface-variant);
+  text-align: center;
+  margin: 5px 0;
+}
+
+.label {
+  font-weight: bold;
+  color: var(--on-surface);
+}
+
+.value {
+  font-weight: normal;
+  color: var(--on-surface-variant);
+}
+
+.tripDetails {
+  background-color: var(--surface-variant);
+  color: var(--on-surface-variant);
+  border-radius: 12px;
+  padding: 20px;
+  text-align: center;
+  border-top: 1px solid var(--outline);
+}
+
+.pBudget,
+.pTripType,
+.pAccommodation,
+.pRating {
+  font-size: 1rem;
+  color: var(--on-surface);
+  display: flex;
+  justify-content: space-between;
+  flex: 1;
+  margin: 10px 0;
+}
+
+.pBudget .value,
+.pTripType .value,
+.pAccommodation .value,
+.pRating .value {
+  color: var(--on-surface-variant);
+}
+
+/* filterContainer */
+
+.filterContainer {
+  display: flex;
+  position: fixed;
+  overflow-y: auto; /* Cambia scroll a auto */
+  z-index: 50;
+  left: 0;
+  background-color: var(--on-background);
+  padding: 20px;
+  flex-direction: column;
+  justify-content: flex-start; /* Cambia center a flex-start */
+  align-items: center;
+  height: calc(100vh - 109px);
+  gap: 10px;
+  width: 30%;
+  min-width: 200px;
+}
+
+.hideFilterContainer {
+  animation: hideFilterContainer 0.5s ease forwards;
+}
+
+.showFilterContainer {
+  animation: showFilterContainer 0.5s ease forwards;
+}
+
+.filterContainer::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.filterContainer::-webkit-scrollbar-track {
+  background: var(--surface);
+  border-radius: 10px;
+}
+
+.filterContainer::-webkit-scrollbar-thumb {
+  background-color: var(--primary);
+  border-radius: 10px;
+  border: 2px solid var(--surface);
+}
+
+.filterContainer::-webkit-scrollbar-thumb:hover {
+  background-color: var(--secondary);
+}
+
+.filter {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  background-color: var(--primary);
+  border-radius: 8px;
+  color: var(--on-primary);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.list label {
+  font-size: 1rem;
+  color: var(--background);
+  margin: 5px 0;
+  width: 100%;
+  text-align: left;
+}
+
+.accommodation {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  width: 100%;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  width: 100%;
+}
+
+select {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid var(--outline);
+  border-radius: 4px;
+  font-size: 1rem;
+  color: var(--on-primary);
+  background-color: var(--surface-variant);
+}
+
+.filterContainer input {
+  width: 100%;
+  padding: 8px;
+  margin: 5px 0 15px 0;
+  border: 1px solid var(--outline);
+  border-radius: 4px;
+  font-size: 1rem;
+  color: var(--on-primary);
+  background-color: var(--surface-variant);
+}
+
+.filterContainer input:focus {
+  outline: none;
+  border-color: var(--secondary);
+  box-shadow: 0 0 5px var(--secondary);
+}
+
+@media (max-width: 768px) {
+  .navBar {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .searchBar {
+    width: 100%;
+    padding: 10px;
+  }
+
+  .labelSearch {
+    margin: 0 12px;
+  }
+
+  .logo {
+    margin-bottom: 10px;
+    max-width: max-content;
+  }
+
+  :root {
+    --font-family: "Roboto", sans-serif;
+    --logo-size: 50px;
+    --animation-duration: 0.5s;
+    --animation-translateY: -20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .logo {
+    font-size: 1.5em;
+    max-width: max-content;
+  }
+}
