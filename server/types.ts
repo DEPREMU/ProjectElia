@@ -56,35 +56,3 @@ type TripType = {
   };
   season: "Invierno" | "Primavera" | "Verano" | "Otoño" | "Cualquiera";
 };
-
-type TravelDestination = {
-  code: string;
-  continent: string;
-  lat: number;
-  lon: number;
-  thingsToDo: string[];
-  images: string[];
-  tips: {
-    tipsClimate: { [key: string]: string };
-    tipsGeneral: string[];
-  };
-  climate: string[];
-};
-
-type ResponseJSON = {
-  data: TripType[] | null;
-  error: string | null;
-};
-
-type TypeGetDataEq = {
-  id?: number;
-  destination?: string;
-  countryCode?: string;
-  startDate?: Date;
-  endDate?: Date;
-  budget?: number;
-  travelType?: string;
-  accomodation?: string;
-  rating?: RatingType;
-  continent?: string;
-};

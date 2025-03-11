@@ -23,6 +23,14 @@ document.addEventListener("DOMContentLoaded", () => {
   divLoaded = document.getElementById(
     "cardsContainer loaded"
   ) as HTMLDivElement;
+  filterContainer = document.getElementById(
+    "filterContainer"
+  ) as HTMLDivElement;
+  btnHideFilterContainer = document.getElementById(
+    "btnHideFilterContainer"
+  ) as HTMLButtonElement;
+
+  sendUserToStart();
 
   body.style.overflowY = "hidden";
   divLoaded.style.display = "none";
@@ -33,10 +41,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   showFilterContainer(false);
   handleFilterContainer();
-
-  window.addEventListener("scroll", async () => await handleScroll());
-
-  window.addEventListener("resize", async () => await handleFilterContainer());
 });
 
 const listeners = () => {
@@ -56,14 +60,21 @@ const listeners = () => {
   ) as HTMLSelectElement;
   rating = document.getElementById("rating") as HTMLSelectElement;
   continent = document.getElementById("continent") as HTMLInputElement;
-  filterContainer = document.getElementById(
-    "filterContainer"
-  ) as HTMLDivElement;
-  btnHideFilterContainer = document.getElementById(
-    "btnHideFilterContainer"
-  ) as HTMLButtonElement;
 
   btnHideFilterContainer.style.transition = `all 1s ease`;
+
+  window.addEventListener("scroll", async () => await handleScroll());
+
+  window.addEventListener("resize", async () => await handleFilterContainer());
+
+  window.addEventListener("click", (e: MouseEvent) => {
+    if (filterContainer.contains(e.target as Node)) return;
+    if (btnHideFilterContainer.contains(e.target as Node)) return;
+    if (e.target === filterContainer) return;
+    if (e.target === btnHideFilterContainer) return;
+
+    showFilterContainer(false);
+  });
 
   input?.addEventListener("focus", () => {
     label.classList.add("animatedFD");
@@ -82,17 +93,15 @@ const listeners = () => {
   input?.addEventListener("keyup", async () => {
     const value = input.value;
     sendUserToStart();
-    if (value.length === 0) {
-      currentPage = 1;
-      firstTime = true;
-      const newArr = Array.isArray(arrData)
-        ? arrData.slice(0, currentPage * itemsPerPage)
-        : [arrData];
-      await renderData(newArr, true);
-      return;
-    }
-    if (value.length < 3) return;
-    search(value);
+    if (value.length >= 3) return filterData(value);
+    if (value.length !== 0) return;
+
+    currentPage = 1;
+    firstTime = true;
+    const newArr = isFiltering()
+      ? filteredData
+      : arrData.slice(0, currentPage * itemsPerPage);
+    await renderData(newArr, true);
   });
 
   countryCode?.addEventListener("change", () => {
@@ -147,47 +156,37 @@ const listeners = () => {
   });
 };
 
-const filterData = async () => {
-  filteredData = (
-    searchData.length > 0
-      ? searchData
-      : Array.isArray(arrData)
-      ? arrData
-      : [arrData]
-  ).filter((item) => boolFiltering(item));
+const filterData = async (search: string | null = null) => {
+  filteredData = await fetch("/getTrips", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      destination: search ?? input.value,
+      countryCode: countryCode.value ?? null,
+      startDate: startDate.value ?? null,
+      endDate: endDate.value ?? null,
+      minBudget: Number(budgetMin.value) || -1,
+      maxBudget: Number(budgetMax.value) || -1,
+      travelType: travelTypeSelect.value ?? null,
+      accommodation: accommodationSelect.value ?? null,
+      rating:
+        Number(rating.value) in [0, 1, 2, 3, 4, 5]
+          ? Number(rating.value)
+          : null,
+      continent: continent.value ?? null,
+    }),
+  })
+    .then((res) => res.json())
+    .then((data: ResponseJSON) =>
+      !data.data ? [] : Array.isArray(data.data) ? data.data : [data.data]
+    );
 
   currentPage = 1;
   firstTime = true;
   loadingData = true;
   await renderData(filteredData.slice(0, currentPage * itemsPerPage), true);
-};
-
-const boolFiltering = (item: TripType) => {
-  const startDateVal = startDate.value ? new Date(startDate.value) : null;
-  const endDateVal = endDate.value ? new Date(endDate.value) : null;
-  const itemStartDate = new Date(item.startDate);
-  const itemEndDate = new Date(item.endDate);
-
-  const budgetMinVal = budgetMin.value ? parseFloat(budgetMin.value) : null;
-  const budgetMaxVal = budgetMax.value ? parseFloat(budgetMax.value) : null;
-  const ratingVal = rating.value ? parseInt(rating.value) : null;
-
-  const matchesStrict =
-    (countryCode.value ? item.countryCode === countryCode.value : true) &&
-    (startDateVal ? itemStartDate >= startDateVal : true) &&
-    (endDateVal ? itemEndDate <= endDateVal : true) &&
-    (budgetMinVal ? item.budget >= budgetMinVal : true) &&
-    (budgetMaxVal ? item.budget <= budgetMaxVal : true) &&
-    (travelTypeSelect.value
-      ? item.travelType === travelTypeSelect.value
-      : true) &&
-    (accommodationSelect.value
-      ? item.accommodation === accommodationSelect.value
-      : true) &&
-    (ratingVal ? item.rating === ratingVal : true) &&
-    (continent.value ? item.continent === continent.value : true);
-
-  return matchesStrict;
 };
 
 const handleFilterContainer = async () => {
@@ -205,33 +204,25 @@ const showFilterContainer = (show: boolean) => {
     filterContainer?.classList.add("showFilterContainer");
     btnHideFilterContainer.classList.remove("rotate0deg");
     btnHideFilterContainer.classList.add("rotate180deg");
-    showBtnHideFilterContainer(false);
     return;
   }
   btnHideFilterContainer.classList.add("rotate0deg");
   btnHideFilterContainer.classList.remove("rotate180deg");
   filterContainer?.classList.add("hideFilterContainer");
   filterContainer?.classList.remove("showFilterContainer");
-  showBtnHideFilterContainer(true);
 };
 
-const showBtnHideFilterContainer = (hiddenFilter: boolean) => {
-  const heightFilterContainer =
-    filterContainer.offsetHeight + filterContainer.offsetTop;
-  const widthFilterContainer = filterContainer.offsetWidth;
-
-  btnHideFilterContainer.style.top = (heightFilterContainer - 20) / 2 + `px`;
-  btnHideFilterContainer.style.left = `${
-    hiddenFilter ? "-5" : widthFilterContainer - 20
-  }px`;
-  let timer: NodeJS.Timeout;
-  if (hiddenFilter && btnHideFilterContainer.offsetLeft !== -5)
-    timer = setTimeout(() => showBtnHideFilterContainer(true), 1);
-  else if (
-    !hiddenFilter &&
-    btnHideFilterContainer.offsetLeft !== widthFilterContainer
-  )
-    timer = setTimeout(() => showBtnHideFilterContainer(false), 1);
-
-  return () => clearTimeout(timer);
+const isFiltering = (): boolean => {
+  return (
+    input?.value.length > 2 ||
+    !!countryCode?.value ||
+    !!startDate?.value ||
+    !!endDate?.value ||
+    !!budgetMin?.value ||
+    !!budgetMax?.value ||
+    !!travelTypeSelect?.value ||
+    !!accommodationSelect?.value ||
+    (rating?.value && Number(rating.value) > -1) ||
+    !!continent?.value
+  );
 };

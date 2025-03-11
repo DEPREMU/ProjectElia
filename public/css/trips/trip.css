@@ -30,6 +30,7 @@
     opacity: 0;
   }
 }
+
 .showImageLargeBW,
 .showImageLargeFD {
   z-index: 10;
@@ -180,6 +181,25 @@ main {
   font-weight: bold;
 }
 
+.continent {
+  font-size: 1.2em;
+  color: var(--on-secondary);
+  font-weight: bold;
+  margin: 10px 0;
+}
+
+.dates {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.dates p {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px;
+}
+
 .tripDetails {
   display: flex;
   flex-direction: column;
@@ -206,7 +226,7 @@ main {
 /* Carrusel de imágenes */
 .carrusel {
   display: flex;
-  overflow-x: auto;
+  overflow-x: scroll;
   scroll-snap-type: x mandatory;
   gap: 12px;
   padding: 12px;

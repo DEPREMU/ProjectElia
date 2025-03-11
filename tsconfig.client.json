@@ -3,15 +3,13 @@
     "target": "ES2022",
     "module": "ES2022",
     "moduleResolution": "node",
-    "outDir": "./dist/server",
-    "rootDir": "server",
+    "outDir": "./public/scripts",
+    "rootDir": "./src",
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true,
-    "allowImportingTsExtensions": true,
-    "noEmit": true
+    "forceConsistentCasingInFileNames": true
   },
-  "include": ["server/**/*"],
+  "include": ["src/**/*"],
   "exclude": ["node_modules", "dist"]
 }

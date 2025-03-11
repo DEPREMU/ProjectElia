@@ -1,7 +1,7 @@
 import { createClient } from "@supabase/supabase-js";
-import dotenv, { DotenvParseOutput } from "dotenv";
+import dotenv from "dotenv";
 
-const env: DotenvParseOutput | undefined = dotenv.config().parsed;
+const env: dotenv.DotenvParseOutput | undefined = dotenv.config().parsed;
 
 if (!env) {
   throw new Error("Environment variables are not defined");

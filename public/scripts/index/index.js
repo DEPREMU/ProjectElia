@@ -3,7 +3,6 @@ const mainRoute = "http://localhost:3000";
 let currentPage = 1;
 let itemsPerPage = 12;
 let arrData = [];
-let searchData = [];
 let filteredData = [];
 let body;
 let divCards;
@@ -38,26 +37,24 @@ const loadData = async () => {
 const handleScroll = async () => {
     if (loadingData || firstTime)
         return;
-    if (!Array.isArray(arrData) || arrData.length === 0)
+    if (arrData.length === 0)
         return;
     const heightDiv = divCards.offsetHeight;
     const isMobile = window.innerWidth < 768;
     const scrollPosition = window.innerHeight + window.scrollY;
-    if (scrollPosition < heightDiv - (isMobile ? 400 : 250))
+    if (scrollPosition < heightDiv - (isMobile ? 450 : 300))
         return;
     if (arrData.length <= currentPage * itemsPerPage)
         return;
     loadingData = true;
     currentPage++;
-    const data = (searchData.length === 0 ? arrData : searchData).slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
+    const data = (isFiltering() && filteredData.length !== 0 ? filteredData : arrData).slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
     await renderData(data);
 };
 const getValidImage = async (images) => {
     for (const image of images) {
         try {
-            const response = await fetch(image).catch(() => null);
-            if (!response)
-                continue;
+            const response = (await fetch(image).catch(() => null));
             if (response.ok && response.status === 200)
                 return image;
         }
@@ -65,16 +62,17 @@ const getValidImage = async (images) => {
     }
     return "https://images.pexels.com/photos/1133505/pexels-photo-1133505.jpeg?cs=srgb&dl=pexels-jplenio-1133505.jpg&fm=jpg"; // Fallback image
 };
-const renderData = async (data, search = false) => {
+const renderData = async (data, clearContainer = false) => {
     loadingData = true;
-    if (firstTime) {
-        divLoaded.style.display = "none";
-        divLoading.style.display = "flex";
-        body.style.overflowY = "hidden";
-    }
-    if (search)
+    if (firstTime)
+        await handleFirstTime();
+    if (clearContainer)
         cardsContainer.innerHTML = "";
-    await Promise.all((Array.isArray(data) ? data : [data]).map(async (trip, index) => {
+    let cardsLoading;
+    if (data.length > 0)
+        cardsLoading = await addCardsLoading();
+    const fragment = document.createDocumentFragment();
+    await Promise.all(data.map(async (trip, index) => {
         if (index >= currentPage * itemsPerPage)
             return;
         const button = document.createElement("button");
@@ -122,8 +120,11 @@ const renderData = async (data, search = false) => {
             </p>
           </div>
     `;
-        cardsContainer.appendChild(button);
+        fragment.appendChild(button);
     }));
+    if (data.length > 0)
+        removeCardsLoading(cardsLoading);
+    cardsContainer.appendChild(fragment);
     loadingData = false;
     if (firstTime)
         skeletonLoading();
@@ -141,22 +142,69 @@ const skeletonLoading = () => {
         }, 500);
     }, 1000);
 };
-const search = async (value) => {
-    if (!Array.isArray(arrData) || arrData.length === 0)
-        return;
-    firstTime = true;
-    loadingData = true;
-    currentPage = 1;
-    searchData = (filteredData.length > 0 ? filteredData : arrData).filter((trip) => boolIsInTrip(trip, value.toLowerCase()));
-    console.log(currentPage * itemsPerPage);
-    await renderData(searchData.slice(0, currentPage * itemsPerPage), true);
-};
-const boolIsInTrip = (trip, value) => {
-    return (trip.destination.toLowerCase().includes(value) ||
-        trip.continent.toLowerCase().includes(value) ||
-        trip.travelType.toLowerCase().includes(value) ||
-        trip.accommodation.toLowerCase().includes(value));
-};
 const sendUserToStart = async () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
+};
+const resetFilters = () => {
+    currentPage = 1;
+    filteredData = [];
+    countryCode.value = "";
+    startDate.value = "";
+    endDate.value = "";
+    budgetMin.value = "";
+    budgetMax.value = "";
+    travelTypeSelect.value = "";
+    accommodationSelect.value = "";
+    rating.value = "-1";
+    continent.value = "";
+    renderData(arrData, true);
+};
+const addCardsLoading = async () => {
+    const cardLoading1 = document.createElement("div");
+    const card = ' <button class="card">\
+        <div class="cardBody">\
+        <div class="skeleton skeleton-img"></div>\
+        <h2 class="skeleton skeleton-title"></h2>\
+            <p class="skeleton skeleton-text"></p>\
+            <div class="dates">\
+              <div class="skeleton-dates">\
+                <p class="skeleton skeleton-text-dates"></p>\
+                <p class="skeleton skeleton-text-dates"></p>\
+              </div>\
+              <div class="skeleton-dates">\
+                <p class="skeleton skeleton-text-dates"></p>\
+                <p class="skeleton skeleton-text-dates"></p>\
+              </div>\
+            </div>\
+          </div>\
+          <div class="tripDetails">\
+            <p class="skeleton skeleton-details"></p>\
+            <p class="skeleton skeleton-details"></p>\
+            <p class="skeleton skeleton-details"></p>\
+            <p class="skeleton skeleton-details"></p>\
+          </div>\
+        </button>';
+    cardLoading1.classList.add("card");
+    cardLoading1.innerHTML = card;
+    const cardLoading2 = cardLoading1.cloneNode(true);
+    const cardLoading3 = cardLoading1.cloneNode(true);
+    cardsContainer.appendChild(cardLoading1);
+    cardsContainer.appendChild(cardLoading2);
+    cardsContainer.appendChild(cardLoading3);
+    return { cardLoading1, cardLoading2, cardLoading3 };
+};
+const handleFirstTime = async () => {
+    divLoaded.style.display = "none";
+    divLoading.style.display = "flex";
+    body.style.overflowY = "hidden";
+};
+const removeCardsLoading = (cardsLoading) => {
+    cardsLoading.cardLoading1.classList.add("fadeOut");
+    cardsLoading.cardLoading2.classList.add("fadeOut");
+    cardsLoading.cardLoading3.classList.add("fadeOut");
+    setTimeout(() => {
+        cardsContainer.removeChild(cardsLoading.cardLoading1);
+        cardsContainer.removeChild(cardsLoading.cardLoading2);
+        cardsContainer.removeChild(cardsLoading.cardLoading3);
+    }, 500);
 };

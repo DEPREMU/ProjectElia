@@ -4,8 +4,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Trips</title>
+    <link rel="icon" href="assets/logo.png" />
     <link rel="stylesheet" href="css/common/colors.css" />
-    <link rel="stylesheet" href="css/index.css" />
+    <link rel="stylesheet" href="css/index/index.css" />
     <link rel="stylesheet" href="css/skeletons/indexSkeleton.css" />
   </head>
   <body>
@@ -36,10 +37,23 @@
           />
         </button>
         <div class="filterContainer" id="filterContainer">
+          <button
+            class="btnHideFilterContainerInside"
+            onclick="showFilterContainer(false)"
+          >
+            <img
+              src="assets/arrow.png"
+              class="imgHideFilterContainer"
+              alt="show/hide"
+              style="transform: rotate(180deg)"
+            />
+          </button>
+
           <div class="list">
             <label for="countryCode">Country Code:</label>
             <input type="text" id="countryCode" name="countryCode" />
           </div>
+
           <div class="list">
             <label for="startDate">Start Date:</label>
             <input type="date" id="startDate" name="startDate" />
@@ -88,7 +102,8 @@
           <div class="list">
             <label for="rating">Rating:</label>
             <select name="rating" id="rating">
-              <option value=""></option>
+              <option value="-1"></option>
+              <option value="0">0 estrella</option>
               <option value="1">1 estrella</option>
               <option value="2">2 estrellas</option>
               <option value="3">3 estrellas</option>
@@ -110,12 +125,20 @@
               <option value="South America">América del Sur</option>
             </select>
           </div>
+
+          <button
+            type="button"
+            class="btnResetFilters"
+            onclick="resetFilters()"
+          >
+            Reestablecer filtros
+          </button>
         </div>
         <div
           class="cardsContainer posAbsolute"
           id="cardsContainer loaded"
         ></div>
-        <div class="cardsContainer" id="loading"></div>
+        <div class="cardsContainer" id="loading">{{cardsSkeletonLoading}}</div>
       </div>
     </div>
     <script src="scripts/index/listeners.js" defer></script>

@@ -1,7 +1,14 @@
 let html: HTMLHtmlElement;
 let mainLoading: HTMLElement;
 let mainLoaded: HTMLElement;
+let tripData: TripType;
+let iframeMap: HTMLElement | null;
+let tripCardDiv: HTMLDivElement | null;
 let imgShowed: string = "";
+
+const makeRegex = (value: string): RegExp => {
+  return new RegExp(`\\{\\{${value}\\}\\}`, "g");
+};
 
 document.addEventListener("DOMContentLoaded", () => {
   const urlParams = new URLSearchParams(window.location.search);
@@ -22,12 +29,9 @@ document.addEventListener("DOMContentLoaded", () => {
     .then((data: ResponseJSON) => {
       if (data.error || !data.data) return renderError();
 
-      if (Array.isArray(data.data)) {
-        if (data.data.length === 1) return renderTrip(data.data[0]);
-        else return renderError();
-      }
-
-      if (data.data) return renderTrip(data.data);
+      if (!data.data) return;
+      tripData = data.data[0];
+      renderTrip(data.data[0]);
     })
     .catch((error) => {
       console.error(error);
@@ -38,7 +42,6 @@ document.addEventListener("DOMContentLoaded", () => {
     resizeIframe();
   });
 });
-
 const renderTrip = async (trip: TripType) => {
   let htmlTrip = await fetch("trips/trip.html")
     .then((res) => res.text())
@@ -47,60 +50,44 @@ const renderTrip = async (trip: TripType) => {
   if (!htmlTrip) return;
 
   // Reemplazar valores básicos
-  htmlTrip = htmlTrip
-    .replace(/{{destination}}/g, trip.destination)
-    .replace(/{{countryCode}}/g, trip.countryCode)
-    .replace(/{{continent}}/g, trip.continent)
-    .replace(/{{climate}}/g, trip.climate)
-    .replace(/{{season}}/g, trip.season)
-    .replace(/{{travelType}}/g, trip.travelType)
-    .replace(/{{accommodation}}/g, trip.accommodation)
-    .replace(/{{rating}}/g, trip.rating.toString())
-    .replace(/{{budget}}/g, `$${trip.budget.toFixed(2)}`)
-    .replace(/{{lat}}/g, trip.coords.lat.toString())
-    .replace(/{{lon}}/g, trip.coords.lon.toString());
+  const replacements: { [key: string]: any } = {
+    destination: trip.destination,
+    countryCode: trip.countryCode,
+    continent: trip.continent,
+    climate: trip.climate,
+    season: trip.season,
+    travelType: trip.travelType,
+    accommodation: trip.accommodation,
+    rating: trip.rating.toString(),
+    budget: `$${trip.budget.toFixed(2)}`,
+    lat: trip.coords.lat.toString(),
+    lon: trip.coords.lon.toString(),
+    startDate: new Date(trip.startDate).toDateString(),
+    endDate: new Date(trip.endDate).toDateString(),
+    mainImage: (await getValidImage(trip.images)) || trip.images[0],
+    tipsClimate:
+      trip.travelTips.tipsClimate[trip.climate] ||
+      "No hay consejos específicos.",
+    tipsGeneral:
+      trip.travelTips.tipsGeneral
+        .map((tip) => (tip ? `<li>${tip}</li>` : ""))
+        .join("") || "No hay consejos generales.",
+    thingsToDo: trip.thingsToDo
+      .map((activity) => `<li>${activity}</li>`)
+      .join(""),
+    opinions: trip.notes || "Sin opiniones disponibles.",
+  };
 
-  // Formatear fechas
-  htmlTrip = htmlTrip.replace(
-    /{{startDate}}/g,
-    new Date(trip.startDate).toDateString()
-  );
-  htmlTrip = htmlTrip.replace(
-    /{{endDate}}/g,
-    new Date(trip.endDate).toDateString()
-  );
-
-  // Obtener imagen principal válida
-  const mainImage = await getValidImage(trip.images);
-  htmlTrip = htmlTrip.replace(/{{mainImage}}/g, mainImage);
-
-  // Clima y consejos
-  htmlTrip = htmlTrip.replace(
-    /{{tipsClimate}}/g,
-    trip.travelTips.tipsClimate[trip.climate] || "No hay consejos específicos."
-  );
-
-  html.title = trip.destination;
-
-  const tipsGeneralList = trip.travelTips.tipsGeneral
-    .map((tip) => (tip ? `<li>${tip}</li>` : ""))
-    .join("");
-
-  htmlTrip = htmlTrip.replace(
-    /{{tipsGeneral}}/g,
-    tipsGeneralList || "No hay consejos generales."
-  );
-
-  // Lista de cosas por hacer
-  const thingsToDoList = trip.thingsToDo
-    .map((activity) => `<li>${activity}</li>`)
-    .join("");
-  htmlTrip = htmlTrip.replace(/{{thingsToDo}}/g, thingsToDoList);
+  for (const key in replacements) {
+    htmlTrip = htmlTrip.replace(makeRegex(key), replacements[key]);
+  }
 
   // Generar carrusel de imágenes
-  const newImages = trip.images.filter((image) => image !== mainImage);
+  const newImages = trip.images.filter(
+    (image: string) => image !== replacements.mainImage
+  );
   const carruselImages = newImages
-    .map((image, index) => {
+    .map((image: string, index: number) => {
       const idImg = `imageCarrusel${index + 1}`;
       const idBtn = `btn${index + 1}`;
       return `
@@ -119,15 +106,17 @@ const renderTrip = async (trip: TripType) => {
         </button>
       `;
     })
+    .filter(Boolean)
     .join("");
 
-  htmlTrip = htmlTrip.replace(/{{carruselImages}}/g, carruselImages);
+  htmlTrip = htmlTrip.replace(makeRegex("carruselImages"), carruselImages);
 
-  // Agregar opiniones
-  htmlTrip = htmlTrip.replace(
-    /{{opinions}}/g,
-    trip.notes || "Sin opiniones disponibles."
-  );
+  document.title = `${trip.destination} - ${trip.budget}`;
+  const link = document.createElement("link");
+  link.rel = "icon";
+  link.href = replacements.mainImage;
+  link.style.borderRadius = "50%";
+  document.head.appendChild(link);
 
   mainLoading.classList.add("posAbsolute");
   mainLoading.classList.add("z-10");
@@ -171,12 +160,11 @@ const showImageLarge = (id: string) => {
 };
 
 const resizeIframe = () => {
-  const tripCardDiv: HTMLDivElement = document.getElementById(
-    "tripCard"
-  ) as HTMLDivElement;
-  const iframeMap: HTMLDivElement = document.getElementById(
-    "iframeMap"
-  ) as HTMLDivElement;
+  if (!tripCardDiv)
+    tripCardDiv = document.getElementById("tripCard") as HTMLDivElement;
+  if (!iframeMap) iframeMap = document.getElementById("iframeMap");
+
+  if (!tripCardDiv || !iframeMap) return;
 
   let heightTripCard: number = tripCardDiv.offsetHeight;
   if (window.innerWidth < 768) heightTripCard = 600;

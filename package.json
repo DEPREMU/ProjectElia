@@ -3,12 +3,14 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "start": "tsc && node ./public/scripts/App.js"
+    "start": "npm run build:client && node server/App.ts",
+    "build:client": "tsc --project tsconfig.client.json"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.49.1",
     "@types/cors": "^2.8.17",
     "@types/express": "^5.0.0",
+    "@types/node": "^22.13.10",
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",

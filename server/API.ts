@@ -1,39 +1,7 @@
-import express, { Request } from "express";
+import fs from "fs";
 import cors from "cors";
-import { supabase } from "./supabaseClient.js";
-
-type RatingType = 0 | 1 | 2 | 3 | 4 | 5;
-
-type notAllowed = null | undefined;
-
-type TripType = {
-  id: number;
-  destination: string;
-  countryCode: string;
-  startDate: Date;
-  endDate: Date;
-  budget: number;
-  travelType: string;
-  accomodation: string;
-  rating: RatingType;
-  continent: string;
-  notes: string | notAllowed;
-  image: string | notAllowed;
-  createdAt: Date;
-};
-
-type ReqBodyType = {
-  destination: string | notAllowed;
-  countryCode: string | notAllowed;
-  startDate: string | notAllowed;
-  endDate: string | notAllowed;
-  minBudget: number | notAllowed;
-  maxBudget: number | notAllowed;
-  travelType: string | notAllowed;
-  accomodation: string | notAllowed;
-  rating: RatingType | notAllowed;
-  continent: string | notAllowed;
-};
+import express from "express";
+import { supabase } from "./supabaseClient.ts";
 
 const app = express();
 export const tableNameTrips = "trips";
@@ -44,37 +12,21 @@ app.use(express.json());
 export let port = 3000;
 export let host = "localhost";
 
-const args = process.argv.slice(2);
-
-const getArgValue = (flag: string) => {
-  const index: number = args.indexOf(flag);
-  return index !== -1 && args[index + 1] ? args[index + 1] : null;
-};
-
-if (args.length > 0) {
-  const portArg: string | null = getArgValue("--port") || getArgValue("-p");
-  const numPortArg: number = Number(portArg);
-  if (numPortArg) port = numPortArg;
-  else if (!numPortArg) {
-    console.error("Invalid port number");
-    process.exit(1);
-  }
-
-  const hostArg: string | null = getArgValue("--host") || getArgValue("-h");
-  const regexIP: RegExp = /^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$/;
-  if (hostArg && regexIP.test(hostArg)) host = hostArg;
-  else if (!regexIP.test(host)) {
-    console.error("Invalid hostname");
-    process.exit(1);
-  }
-}
-
 if (!supabase) {
   console.error("Supabase client not created successfully");
   process.exit(1);
 }
 
-app.get("/getTrips", async (req, res) => {
+const boolIsInTrip = (trip: TripType, value: string) => {
+  return (
+    trip.destination.toLowerCase().includes(value) ||
+    trip.continent.toLowerCase().includes(value) ||
+    trip.travelType.toLowerCase().includes(value) ||
+    trip.accommodation.toLowerCase().includes(value)
+  );
+};
+
+app.get("/getTrips", async (_: Request, res: any) => {
   const { data, error }: { data: TripType[] | null; error: Error | null } =
     await supabase.from(tableNameTrips).select("*");
 
@@ -85,7 +37,7 @@ app.get("/getTrips", async (req, res) => {
   }
 });
 
-app.post("/getTrips", async (req: Request, res: any) => {
+app.post("/getTrips", async (req: express.Request, res: any) => {
   const body = await req.body;
 
   if (body.id) {
@@ -109,7 +61,7 @@ app.post("/getTrips", async (req: Request, res: any) => {
     minBudget,
     maxBudget,
     travelType,
-    accomodation,
+    accommodation,
     rating,
     continent,
   }: ReqBodyType = await body;
@@ -119,12 +71,15 @@ app.post("/getTrips", async (req: Request, res: any) => {
     return res.status(500).json({ data: null, error: error?.message });
 
   if (destination) {
-    data = data.filter((trip: TripType) => trip.destination === destination);
+    console.log("Filtering by destination:", destination);
+    data = data.filter((trip: TripType) => boolIsInTrip(trip, destination));
   }
   if (countryCode) {
+    console.log("Filtering by country code:", countryCode);
     data = data.filter((trip: TripType) => trip.countryCode === countryCode);
   }
   if (startDate) {
+    console.log("Filtering by start date:", startDate);
     data = data.filter((trip: TripType) => {
       const date = new Date(startDate);
       const tripDate = new Date(trip.startDate);
@@ -135,6 +90,7 @@ app.post("/getTrips", async (req: Request, res: any) => {
     });
   }
   if (endDate) {
+    console.log("Filtering by end date:", endDate);
     data = data.filter((trip: TripType) => {
       const date = new Date(endDate);
       const tripDate = new Date(trip.endDate);
@@ -144,24 +100,35 @@ app.post("/getTrips", async (req: Request, res: any) => {
       );
     });
   }
-  if (minBudget) {
+  if (minBudget && minBudget > 0) {
+    console.log("Filtering by min budget:", minBudget);
     data = data.filter((trip: TripType) => trip.budget >= minBudget);
   }
-  if (maxBudget) {
+  if (maxBudget && maxBudget > 0) {
+    console.log("Filtering by max budget:", maxBudget);
     data = data.filter((trip: TripType) => trip.budget <= maxBudget);
   }
   if (travelType) {
+    console.log("Filtering by travel type:", travelType);
     data = data.filter((trip: TripType) => trip.travelType === travelType);
   }
-  if (accomodation) {
-    data = data.filter((trip: TripType) => trip.accomodation === accomodation);
-  }
-  if (rating) {
+  if (rating || rating === 0) {
+    console.log("Filtering by rating:", rating);
     data = data.filter((trip: TripType) => trip.rating === rating);
   }
+  if (accommodation) {
+    console.log("Filtering by accommodation:", accommodation);
+    data = data.filter(
+      (trip: TripType) => trip.accommodation === accommodation
+    );
+  }
   if (continent) {
+    console.log("Filtering by continent:", continent);
     data = data.filter((trip: TripType) => trip.continent === continent);
   }
+
+  fs.writeFileSync("body.json", JSON.stringify(body, null, 2));
+
   res
     .status(200)
     .setHeader("Content-Type", "application/json")
