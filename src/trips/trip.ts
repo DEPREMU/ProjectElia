@@ -6,6 +6,16 @@ let iframeMap: HTMLElement | null;
 let tripCardDiv: HTMLDivElement | null;
 let imgShowed: string = "";
 
+/**
+ * Creates a regular expression to match a specific pattern.
+ *
+ * The pattern is defined as `{{value}}`, where `value` is the input string.
+ * The resulting regular expression will match all occurrences of this pattern
+ * in a given string.
+ *
+ * @param value - The string to be used within the pattern.
+ * @returns A global regular expression that matches the pattern `{{value}}`.
+ */
 const makeRegex = (value: string): RegExp => {
   return new RegExp(`\\{\\{${value}\\}\\}`, "g");
 };
@@ -42,7 +52,51 @@ document.addEventListener("DOMContentLoaded", () => {
     resizeIframe();
   });
 });
-const renderTrip = async (trip: TripType) => {
+
+/**
+ * Renders the trip details by fetching the trip HTML template, replacing placeholders with trip data,
+ * and updating the DOM with the rendered HTML.
+ *
+ * @param {TripType} trip - The trip data to be rendered.
+ * @returns {Promise<void>} A promise that resolves when the trip details have been rendered.
+ *
+ * @async
+ * @function
+ *
+ * @description
+ * This function performs the following steps:
+ * 1. Fetches the trip HTML template.
+ * 2. Replaces placeholders in the template with actual trip data.
+ * 3. Generates a carousel of images for the trip.
+ * 4. Updates the document title and favicon.
+ * 5. Handles loading and transition effects for the main content.
+ *
+ * @example
+ * const trip = {
+ *   destination: "Paris",
+ *   countryCode: "FR",
+ *   continent: "Europe",
+ *   climate: "Temperate",
+ *   season: "Spring",
+ *   travelType: "Leisure",
+ *   accommodation: "Hotel",
+ *   rating: 4.5,
+ *   budget: 1200.00,
+ *   coords: { lat: 48.8566, lon: 2.3522 },
+ *   startDate: "2023-04-01",
+ *   endDate: "2023-04-10",
+ *   images: ["image1.jpg", "image2.jpg"],
+ *   travelTips: {
+ *     tipsClimate: { Temperate: "Pack light jackets." },
+ *     tipsGeneral: ["Visit the Eiffel Tower.", "Try local cuisine."]
+ *   },
+ *   thingsToDo: ["Sightseeing", "Museum visits"],
+ *   notes: "Great trip overall!"
+ * };
+ *
+ * renderTrip(trip);
+ */
+const renderTrip = async (trip: TripType): Promise<void> => {
   let htmlTrip = await fetch("trips/trip.html")
     .then((res) => res.text())
     .catch(() => renderError());
@@ -132,7 +186,14 @@ const renderTrip = async (trip: TripType) => {
   }, 2000);
 };
 
-const renderError = () => {
+/**
+ * Fetches the Error.html file and sets its content to the innerHTML of the `html` element.
+ * If an error occurs during the fetch, it redirects the user to the home page.
+ *
+ * @function
+ * @name renderError
+ */
+const renderError = (): void => {
   fetch("./Error.html")
     .then((response) => response.text())
     .then((data) => {
@@ -143,7 +204,13 @@ const renderError = () => {
     });
 };
 
-const showImageLarge = (id: string) => {
+/**
+ * Swaps the source of the main image with the source of a new image identified by the given ID.
+ * After swapping the images, it triggers the `resizeIframe` function after a delay of 1 second.
+ *
+ * @param id - The ID of the new image element to swap with the main image.
+ */
+const showImageLarge = (id: string): void => {
   const mainImage: HTMLImageElement = document.getElementById(
     "mainImage"
   ) as HTMLImageElement;
@@ -159,7 +226,21 @@ const showImageLarge = (id: string) => {
   setTimeout(resizeIframe, 1000);
 };
 
-const resizeIframe = () => {
+/**
+ * Adjusts the height of an iframe element to match the height of a trip card element.
+ * If the window width is less than 768 pixels, the height of the trip card is set to 600 pixels.
+ *
+ * The function first checks if the `tripCardDiv` and `iframeMap` elements are already defined.
+ * If not, it attempts to retrieve them from the DOM using their respective IDs.
+ * If either element is not found, the function exits early.
+ *
+ * The height of the `tripCardDiv` element is then used to set the height of the `iframeMap` element.
+ *
+ * @remarks
+ * This function assumes that the `tripCardDiv` and `iframeMap` elements exist in the DOM
+ * and have the IDs "tripCard" and "iframeMap", respectively.
+ */
+const resizeIframe = (): void => {
   if (!tripCardDiv)
     tripCardDiv = document.getElementById("tripCard") as HTMLDivElement;
   if (!iframeMap) iframeMap = document.getElementById("iframeMap");
@@ -171,7 +252,12 @@ const resizeIframe = () => {
   iframeMap.style.height = `${heightTripCard}px`;
 };
 
-const removeImg = (id: string) => {
+/**
+ * Removes an image element from the DOM based on the provided ID.
+ *
+ * @param id - The ID of the image element to be removed.
+ */
+const removeImg = (id: string): void => {
   const imageElement: HTMLImageElement = document.getElementById(
     id
   ) as HTMLImageElement;

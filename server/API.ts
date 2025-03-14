@@ -1,23 +1,70 @@
+/**
+ * This module sets up an Express server with endpoints to interact with a Supabase database.
+ * It includes CORS and JSON parsing middleware, and defines routes to get and filter trips data.
+ *
+ * @module API
+ */
+
 import fs from "fs";
 import cors from "cors";
 import express from "express";
 import { supabase } from "./supabaseClient.ts";
+import { PostgrestError } from "@supabase/supabase-js";
 
 const app = express();
 export const tableNameTrips = "trips";
 
+//? We activate CORS and JSON parsing
+
 app.use(cors());
 app.use(express.json());
 
-export let port = 3000;
-export let host = "localhost";
+//? We define the port and host
 
+/**
+ * The port number on which the server will listen.
+ * @type {number}
+ */
+export let port: number = 3000;
+/**
+ * The hostname for the server.
+ *
+ * @remarks
+ * This variable is used to specify the hostname where the server is running.
+ *
+ * @type {string}
+ *
+ * @example
+ * ```typescript
+ * import { host } from './API';
+ * console.log(host); // Output: "localhost"
+ * ```
+ */
+export let host: string = "localhost";
+
+//? We check if the Supabase client was created successfully, if not, we exit the process (program)
 if (!supabase) {
   console.error("Supabase client not created successfully");
   process.exit(1);
 }
 
-const boolIsInTrip = (trip: TripType, value: string) => {
+/**
+ * Represents the response structure for trips.
+ *
+ * @typedef {Object} ResponseTrips
+ * @property {TripType[] | null} data - An array of TripType objects or null if no data is available.
+ * @property {PostgrestError | null} error - An error object if an error occurred, or null if no error.
+ */
+type ResponseTrips = { data: TripType[] | null; error: PostgrestError | null };
+
+/**
+ * Checks if a trip contains a specific value in its destination, continent, travel type, or accommodation.
+ *
+ * @param {TripType} trip - The trip object to check.
+ * @param {string} value - The value to search for in the trip's properties.
+ * @returns {boolean} - Returns true if the value is found in any of the trip's properties, otherwise false.
+ */
+const boolIsInTrip = (trip: TripType, value: string): boolean => {
   return (
     trip.destination.toLowerCase().includes(value) ||
     trip.continent.toLowerCase().includes(value) ||
@@ -26,9 +73,18 @@ const boolIsInTrip = (trip: TripType, value: string) => {
   );
 };
 
+/**
+ * GET /getTrips
+ *
+ * Retrieves all trips from the database.
+ *
+ * @param {Request} _ - The request object (not used).
+ * @param {any} res - The response object.
+ */
 app.get("/getTrips", async (_: Request, res: any) => {
-  const { data, error }: { data: TripType[] | null; error: Error | null } =
-    await supabase.from(tableNameTrips).select("*");
+  const { data, error }: ResponseTrips = await supabase
+    .from(tableNameTrips)
+    .select("*");
 
   if (error) {
     res.status(500).json({ data: null, error: error.message });
@@ -37,11 +93,19 @@ app.get("/getTrips", async (_: Request, res: any) => {
   }
 });
 
+/**
+ * POST /getTrips
+ *
+ * Retrieves trips from the database based on the provided filters in the request body.
+ *
+ * @param {express.Request} req - The request object containing the filters.
+ * @param {any} res - The response object.
+ */
 app.post("/getTrips", async (req: express.Request, res: any) => {
-  const body = await req.body;
+  const body: ReqBodyType = await req.body;
 
   if (body.id) {
-    const { data, error } = await supabase
+    const { data, error }: ResponseTrips = await supabase
       .from(tableNameTrips)
       .select("*")
       .eq("id", body.id);
@@ -53,82 +117,85 @@ app.post("/getTrips", async (req: express.Request, res: any) => {
     res.status(400).json({ data: null, error: "Invalid request body" });
     return;
   }
-  const {
-    destination,
-    countryCode,
-    startDate,
-    endDate,
-    minBudget,
-    maxBudget,
-    travelType,
-    accommodation,
-    rating,
-    continent,
-  }: ReqBodyType = await body;
-  let { data, error } = await supabase.from(tableNameTrips).select("*");
+
+  const filters: Filters[] = [
+    "destination",
+    "countryCode",
+    "startDate",
+    "endDate",
+    "minBudget",
+    "maxBudget",
+    "travelType",
+    "accommodation",
+    "rating",
+    "continent",
+  ];
+  let { data, error }: ResponseTrips = await supabase
+    .from(tableNameTrips)
+    .select("*");
 
   if (error || !data)
     return res.status(500).json({ data: null, error: error?.message });
 
-  if (destination) {
-    console.log("Filtering by destination:", destination);
-    data = data.filter((trip: TripType) => boolIsInTrip(trip, destination));
-  }
-  if (countryCode) {
-    console.log("Filtering by country code:", countryCode);
-    data = data.filter((trip: TripType) => trip.countryCode === countryCode);
-  }
-  if (startDate) {
-    console.log("Filtering by start date:", startDate);
-    data = data.filter((trip: TripType) => {
-      const date = new Date(startDate);
-      const tripDate = new Date(trip.startDate);
-      return (
-        tripDate.toISOString().split("T")[0] ===
-        date.toISOString().split("T")[0]
+  for (const filter of filters) {
+    if (!body[filter]) continue;
+
+    console.log(`Filtering by ${filter}:`, body[filter]);
+    if (filter === "destination") {
+      data = data.filter((trip: TripType) =>
+        boolIsInTrip(trip, body[filter] as string)
       );
-    });
-  }
-  if (endDate) {
-    console.log("Filtering by end date:", endDate);
-    data = data.filter((trip: TripType) => {
-      const date = new Date(endDate);
-      const tripDate = new Date(trip.endDate);
-      return (
-        tripDate.toISOString().split("T")[0] ===
-        date.toISOString().split("T")[0]
+    } else if (filter === "startDate" || filter === "endDate") {
+      data = data.filter((trip: TripType) => {
+        const date = new Date(body[filter] as string);
+        const tripDate = new Date(trip[filter]);
+        return (
+          tripDate.toISOString().split("T")[0] ===
+          date.toISOString().split("T")[0]
+        );
+      });
+    } else if (filter === "maxBudget") {
+      data = data.filter(
+        (trip: TripType) => trip.budget <= Number(body[filter])
       );
-    });
-  }
-  if (minBudget && minBudget > 0) {
-    console.log("Filtering by min budget:", minBudget);
-    data = data.filter((trip: TripType) => trip.budget >= minBudget);
-  }
-  if (maxBudget && maxBudget > 0) {
-    console.log("Filtering by max budget:", maxBudget);
-    data = data.filter((trip: TripType) => trip.budget <= maxBudget);
-  }
-  if (travelType) {
-    console.log("Filtering by travel type:", travelType);
-    data = data.filter((trip: TripType) => trip.travelType === travelType);
-  }
-  if (rating || rating === 0) {
-    console.log("Filtering by rating:", rating);
-    data = data.filter((trip: TripType) => trip.rating === rating);
-  }
-  if (accommodation) {
-    console.log("Filtering by accommodation:", accommodation);
-    data = data.filter(
-      (trip: TripType) => trip.accommodation === accommodation
-    );
-  }
-  if (continent) {
-    console.log("Filtering by continent:", continent);
-    data = data.filter((trip: TripType) => trip.continent === continent);
+    } else if (filter === "minBudget") {
+      data = data.filter(
+        (trip: TripType) => trip.budget >= Number(body[filter])
+      );
+    } else {
+      data = data.filter((trip: TripType) => trip[filter] === body[filter]);
+    }
   }
 
   fs.writeFileSync("body.json", JSON.stringify(body, null, 2));
 
+  if (data.length === 0) {
+    data = [
+      {
+        id: 0,
+        destination: "No trips found",
+        countryCode: "",
+        continent: "",
+        startDate: "",
+        endDate: "",
+        budget: 0,
+        travelType: "Otro",
+        accommodation: "Otro",
+        images: ["/assets/NoResults.png"],
+        thingsToDo: [],
+        coords: { lat: 0, lon: 0 },
+        climate: "Templado",
+        rating: 0,
+        notes: "",
+        createdAt: "",
+        travelTips: {
+          tipsClimate: {},
+          tipsGeneral: [],
+        },
+        season: "Cualquiera",
+      },
+    ];
+  }
   res
     .status(200)
     .setHeader("Content-Type", "application/json")

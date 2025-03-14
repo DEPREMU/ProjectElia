@@ -94,11 +94,16 @@
         "Mediterráneo": "El clima es mediterráneo, con veranos calurosos y inviernos suaves."
       },
       "tipsGeneral": [
-        "Prueba croissants, macarons y queso francés.",
-        "Saluda con un beso en cada mejilla y usa 'Bonjour' al entrar a una tienda."
+        "Comida: Prueba el croissant y el pain au chocolat en una boulangerie local.",
+        "Comida: Disfruta de una cena con steak frites en un bistró parisino.",
+        "Costumbres: Saluda con un 'Bonjour' al entrar a una tienda o restaurante.",
+        "Costumbres: Evita hablar en voz alta en el transporte público, ya que se considera de mala educación."
       ]
     },
-    "climate": ["Templado", "Mediterráneo"]
+    "climate": [
+      "Templado",
+      "Mediterráneo"
+    ]
   },
   "Rome": {
     "code": "IT",
@@ -203,11 +208,16 @@
         "Continental": "Los inviernos pueden ser fríos, especialmente por las noches."
       },
       "tipsGeneral": [
-        "Prueba la auténtica pasta carbonara y gelato.",
-        "Cubre tus hombros y rodillas al visitar iglesias."
+        "Prueba la pasta carbonara, un plato típico de Roma.",
+        "No dejes de probar una pizza romana en un restaurante local.",
+        "Los italianos suelen comer tarde, así que ajusta tu horario de comida.",
+        "Cuando saludes a alguien, un beso en cada mejilla es común."
       ]
     },
-    "climate": ["Mediterráneo", "Continental"]
+    "climate": [
+      "Mediterráneo",
+      "Continental"
+    ]
   },
   "Barcelona": {
     "code": "ES",
@@ -309,11 +319,15 @@
         "Mediterráneo": "El clima es ideal para viajar todo el año, pero los veranos pueden ser calurosos."
       },
       "tipsGeneral": [
-        "Come tapas y prueba la paella en restaurantes locales.",
-        "No camines con objetos de valor a la vista para evitar robos."
+        "La paella es un platillo imperdible, especialmente si te gustan los mariscos.",
+        "No olvides probar las tapas, como las patatas bravas o el jamón ibérico.",
+        "Es costumbre tomar una siesta después del almuerzo, especialmente en verano.",
+        "Al ir a una comida, es común compartir los platos entre los comensales."
       ]
     },
-    "climate": ["Mediterráneo"]
+    "climate": [
+      "Mediterráneo"
+    ]
   },
   "London": {
     "code": "GB",
@@ -414,11 +428,15 @@
         "Oceánico": "Lleva un paraguas, el clima es impredecible y lluvioso durante todo el año."
       },
       "tipsGeneral": [
-        "Prueba el fish and chips y el afternoon tea.",
-        "Mantén la derecha en las escaleras mecánicas del metro."
+        "Prueba el fish and chips, una comida típica de la ciudad.",
+        "No te pierdas un desayuno inglés completo con huevos, tocino, salchichas y más.",
+        "La puntualidad es muy importante, especialmente en reuniones o citas.",
+        "En el transporte público, es habitual no hablar demasiado alto."
       ]
     },
-    "climate": ["Oceánico"]
+    "climate": [
+      "Oceánico"
+    ]
   },
   "Amsterdam": {
     "code": "NL",
@@ -526,11 +544,15 @@
         "Oceánico": "Lluvias frecuentes, lleva un impermeable para los días de lluvia."
       },
       "tipsGeneral": [
-        "Come stroopwafels y arenque crudo.",
-        "Respeta los carriles bici y no camines sobre ellos."
+        "Los stroopwafels, una galleta rellena de caramelo, son un dulce local delicioso.",
+        "Prueba el arenque crudo, una delicia para los aventureros gastronómicos.",
+        "Los holandeses son muy directos en sus conversaciones, no te lo tomes a mal.",
+        "Es común andar en bicicleta por la ciudad, así que ten cuidado al cruzar calles."
       ]
     },
-    "climate": ["Oceánico"]
+    "climate": [
+      "Oceánico"
+    ]
   },
   "Berlin": {
     "code": "DE",
@@ -635,11 +657,15 @@
         "Continental": "Inviernos fríos, abrígate bien y lleva ropa adecuada para el frío."
       },
       "tipsGeneral": [
-        "Prueba el currywurst y la cerveza artesanal.",
-        "Respetar la historia es clave, especialmente en sitios conmemorativos."
+        "Prueba el currywurst, una salchicha típica de Berlín.",
+        "El pretzel (Brezn) es un clásico alemán que deberías probar.",
+        "Los alemanes son muy puntuales y esperan lo mismo de los demás.",
+        "Cuando te sirvan cerveza, asegúrate de brindar y hacer contacto visual."
       ]
     },
-    "climate": ["Continental"]
+    "climate": [
+      "Continental"
+    ]
   },
   "Vienna": {
     "code": "AT",
@@ -736,11 +762,15 @@
         "Continental": "El clima es continental, lleva ropa adecuada según la temporada."
       },
       "tipsGeneral": [
-        "Prueba la tarta Sacher y el café vienés.",
-        "Es común dejar propina del 5-10% en restaurantes."
+        "La sachertorte, un pastel de chocolate con mermelada de albaricoque, es famoso aquí.",
+        "No dejes de probar un Wiener Schnitzel, un filete empanado que es clásico en Viena.",
+        "En Viena, es común disfrutar de un café en una cafetería por horas.",
+        "Asegúrate de usar el transporte público de manera respetuosa y eficiente."
       ]
     },
-    "climate": ["Continental"]
+    "climate": [
+      "Continental"
+    ]
   },
   "Prague": {
     "code": "CZ",
@@ -847,11 +877,15 @@
         "Continental": "Inviernos fríos, lleva ropa de abrigo."
       },
       "tipsGeneral": [
-        "Come trdelník y guláš.",
-        "Usa transporte público, es eficiente y económico."
+        "Prueba una tradicional sopa de goulash con pan de centeno.",
+        "No te puedes perder un plato de svíčková, carne en salsa de crema.",
+        "Es común hacer brindis con un 'Na zdraví' cuando bebes cerveza.",
+        "El pueblo checo es muy amigable, pero a menudo es más reservado con los turistas."
       ]
     },
-    "climate": ["Continental"]
+    "climate": [
+      "Continental"
+    ]
   },
   "Zurich": {
     "code": "CH",
@@ -958,11 +992,15 @@
         "Continental": "El clima varía, consulta el pronóstico antes de viajar."
       },
       "tipsGeneral": [
-        "Prueba el chocolate suizo y la fondue.",
-        "La puntualidad es muy valorada en Suiza."
+        "Prueba una raclette suiza, que es queso derretido servido con papas y encurtidos.",
+        "La fondue de queso es otro plato tradicional que deberías probar.",
+        "Los suizos son conocidos por su puntualidad y respeto por las normas.",
+        "Es común que se espere que dejes propina en restaurantes, aunque no es obligatorio."
       ]
     },
-    "climate": ["Continental"]
+    "climate": [
+      "Continental"
+    ]
   },
   "Athens": {
     "code": "GR",
@@ -1069,11 +1107,15 @@
         "Mediterráneo": "Veranos calurosos, lleva protector solar."
       },
       "tipsGeneral": [
-        "Come souvlaki y moussaka.",
-        "Es común ver a los locales tomar café por horas, disfruta el ritmo relajado."
+        "Prueba un gyro o souvlaki, una comida rápida tradicional griega.",
+        "La moussaka, un pastel de berenjenas con carne, es otra delicia local.",
+        "Los griegos son muy hospitalarios, y a menudo te invitarán a una bebida o comida.",
+        "Es común que las comidas duren horas, especialmente en reuniones familiares."
       ]
     },
-    "climate": ["Mediterráneo"]
+    "climate": [
+      "Mediterráneo"
+    ]
   },
   "New York City": {
     "code": "US",
@@ -1181,11 +1223,15 @@
         "Continental": "El clima varía según la estación, vístete en capas."
       },
       "tipsGeneral": [
-        "Prueba pizza estilo neoyorquino y bagels.",
-        "Camina rápido y no bloquees las aceras."
+        "Los bagels son un desayuno clásico de Nueva York.",
+        "No te pierdas una rebanada de pizza estilo neoyorquino, fina y crujiente.",
+        "En Nueva York, siempre espera que la gente te trate de manera rápida y eficiente.",
+        "No es raro que la gente hable muy rápido o incluso se apresure, así que no te asustes."
       ]
     },
-    "climate": ["Continental"]
+    "climate": [
+      "Continental"
+    ]
   },
   "Los Angeles": {
     "code": "US",
@@ -1282,11 +1328,15 @@
         "Mediterráneo": "El clima es soleado casi todo el año."
       },
       "tipsGeneral": [
-        "Come tacos callejeros y hamburguesas de In-N-Out.",
-        "El tráfico es intenso, planifica tus desplazamientos."
+        "Prueba los tacos de carne asada o los burritos, muy típicos en Los Ángeles.",
+        "Los donuts de Los Ángeles, como los de la cadena Randy's, son muy populares.",
+        "Los angelinos valoran mucho la vida al aire libre y las actividades físicas.",
+        "La etiqueta en Los Ángeles es más relajada, pero la puntualidad sigue siendo importante."
       ]
     },
-    "climate": ["Mediterráneo"]
+    "climate": [
+      "Mediterráneo"
+    ]
   },
   "Toronto": {
     "code": "CA",
@@ -1382,13 +1432,19 @@
       "https://i.pinimg.com/736x/cc/cd/1d/cccd1d9b80dcf03041df34bd7679ae15.jpg"
     ],
     "tips": {
-      "tipsClimate": { "Continental": "Inviernos fríos, lleva abrigo grueso." },
+      "tipsClimate": {
+        "Continental": "Inviernos fríos, lleva abrigo grueso."
+      },
       "tipsGeneral": [
-        "Prueba la poutine y el peameal bacon.",
-        "Usa el TTC (transporte público) para moverte fácilmente."
+        "Prueba el poutine, una comida típica canadiense de papas fritas con queso y salsa.",
+        "No te puedes perder un maple syrup canadiense en tus pancakes o waffles.",
+        "Los canadienses son muy amables y tienden a ser muy educados en su trato.",
+        "La multiculturalidad es un valor clave, por lo que el respeto hacia todas las culturas es esencial."
       ]
     },
-    "climate": ["Continental"]
+    "climate": [
+      "Continental"
+    ]
   },
   "Vancouver": {
     "code": "CA",
@@ -1494,11 +1550,15 @@
         "Oceánico": "Llueve mucho en invierno, lleva impermeable."
       },
       "tipsGeneral": [
-        "Prueba el salmón fresco y los sushi rolls.",
-        "Explora la naturaleza, hay muchas rutas de senderismo cercanas."
+        "Prueba el salmon a la parrilla o el sushi, que son populares en Vancouver.",
+        "No dejes de probar el clam chowder, una sopa espesa de almejas.",
+        "En Vancouver, el respeto por la naturaleza es muy importante, así que cuida el medio ambiente.",
+        "El estilo de vida aquí es relajado, y la gente disfruta de actividades al aire libre como el senderismo."
       ]
     },
-    "climate": ["Oceánico"]
+    "climate": [
+      "Oceánico"
+    ]
   },
   "Mexico City": {
     "code": "MX",
@@ -1607,11 +1667,15 @@
         "Templado": "El clima es templado, pero la altitud puede afectar a algunos viajeros."
       },
       "tipsGeneral": [
-        "Prueba los tacos al pastor y el tamal.",
-        "Usa apps de transporte en lugar de taxis en la calle."
+        "Prueba los tacos al pastor o los de carnitas, son populares en la ciudad.",
+        "La sopa de tortilla o el mole son platos tradicionales que debes probar.",
+        "Es costumbre en México saludar de manera cálida y cercana.",
+        "Los mexicanos son muy sociables y les gusta compartir en las comidas, así que no dudes en participar."
       ]
     },
-    "climate": ["Templado"]
+    "climate": [
+      "Templado"
+    ]
   },
   "Cancun": {
     "code": "MX",
@@ -1717,11 +1781,15 @@
         "Tropical": "Clima tropical, lleva repelente de mosquitos."
       },
       "tipsGeneral": [
-        "Prueba el ceviche y la cochinita pibil.",
-        "Evita nadar en el mar si hay banderas rojas."
+        "Disfruta de un ceviche fresco con jugo de limón y chile, ideal para el calor.",
+        "Prueba los tacos de pescado, típicos en las playas de Cancún.",
+        "En Cancún, la mayoría de los turistas hablan inglés, pero saber algo de español es útil.",
+        "La vida nocturna es vibrante, pero es común que las personas salgan tarde, después de las 10 p.m."
       ]
     },
-    "climate": ["Tropical"]
+    "climate": [
+      "Tropical"
+    ]
   },
   "Tokyo": {
     "code": "JP",
@@ -1821,11 +1889,15 @@
         "Oceánico": "Las estaciones están bien marcadas, elige la mejor época según tu preferencia."
       },
       "tipsGeneral": [
-        "Come sushi, ramen y takoyaki.",
-        "Sigue las normas de etiqueta en el transporte público: no hables en voz alta."
+        "Comida: Prueba el ramen en un pequeño restaurante local para una experiencia auténtica.",
+        "Comida: Disfruta del sushi en un kaiten sushi (sushi giratorio).",
+        "Costumbres: No claves los palillos en el arroz, ya que es un símbolo funerario.",
+        "Costumbres: No hables por teléfono en el transporte público, ya que se considera de mala educación."
       ]
     },
-    "climate": ["Oceánico"]
+    "climate": [
+      "Oceánico"
+    ]
   },
   "Kyoto": {
     "code": "JP",
@@ -1949,11 +2021,15 @@
         "Oceánico": "Los cerezos florecen en abril, una época ideal para visitar."
       },
       "tipsGeneral": [
-        "Prueba el matcha y el kaiseki.",
-        "No toques ni te apoyes en los templos históricos."
+        "Prueba el kaiseki, una cena tradicional japonesa con varios platos delicados.",
+        "El matcha, té verde en polvo, es muy popular en Kyoto, especialmente en los dulces.",
+        "Es importante que te quites los zapatos al entrar en casas y templos.",
+        "En Kyoto, el respeto por la tradición es clave, así que siempre mantén una actitud respetuosa."
       ]
     },
-    "climate": ["Oceánico"]
+    "climate": [
+      "Oceánico"
+    ]
   },
   "Bangkok": {
     "code": "TH",
@@ -2056,13 +2132,19 @@
       "https://www.alajode.com/wp-content/uploads/2021/03/Bangkok-Chinatown.jpg"
     ],
     "tips": {
-      "tipsClimate": { "Tropical": "Hace calor y humedad, usa ropa ligera." },
+      "tipsClimate": {
+        "Tropical": "Hace calor y humedad, usa ropa ligera."
+      },
       "tipsGeneral": [
-        "Prueba el pad thai y el mango sticky rice.",
-        "Respeta la cultura y evita tocar la cabeza de las personas."
+        "Comida: Prueba el pad thai en un puesto callejero para una experiencia auténtica.",
+        "Comida: Disfruta de un mango sticky rice como postre.",
+        "Costumbres: No toques la cabeza de las personas, ya que se considera sagrada.",
+        "Costumbres: Quítate los zapatos antes de entrar a una casa o templo."
       ]
     },
-    "climate": ["Tropical"]
+    "climate": [
+      "Tropical"
+    ]
   },
   "Singapore": {
     "code": "SG",
@@ -2162,13 +2244,19 @@
       "https://d3ba08y2c5j5cf.cloudfront.net/wp-content/uploads/2016/12/09103427/8706370006_500b3cd472_b-806x507.jpg"
     ],
     "tips": {
-      "tipsClimate": { "Tropical": "Clima tropical, lleva ropa ligera." },
+      "tipsClimate": {
+        "Tropical": "Clima tropical, lleva ropa ligera."
+      },
       "tipsGeneral": [
-        "Come chili crab y laksa.",
-        "No mastiques chicle en la calle, está prohibido."
+        "Prueba el chili crab, uno de los platos más famosos del país.",
+        "Disfruta de un laksa, una sopa de fideos picante con coco.",
+        "No mastiques chicle en público; está prohibido en Singapur.",
+        "Respeta las normas de limpieza y no tires basura; las multas son altas."
       ]
     },
-    "climate": ["Tropical"]
+    "climate": [
+      "Tropical"
+    ]
   },
   "Hong Kong": {
     "code": "HK",
@@ -2279,13 +2367,19 @@
       "https://www.cathaypacific.com/content/dam/focal-point/cx/inspiration/2024/07/48_hour_guide_to_Hong_Kong-Drone_view_of_Hong_Kong_city-CHUNYIP_WONG-Gettyimages-HERO.renditionimage.900.600.jpg"
     ],
     "tips": {
-      "tipsClimate": { "Oceánico": "Veranos húmedos, inviernos frescos." },
+      "tipsClimate": {
+        "Oceánico": "Veranos húmedos, inviernos frescos."
+      },
       "tipsGeneral": [
-        "Prueba dim sum y roast goose.",
-        "Evita hablar de política en público."
+        "Prueba el dim sum en un restaurante tradicional.",
+        "Disfruta de un wonton noodle soup en un local auténtico.",
+        "Cuando uses palillos, no los claves en el arroz; es de mala suerte.",
+        "No des propina en taxis; no es común y algunos la rechazan."
       ]
     },
-    "climate": ["Oceánico"]
+    "climate": [
+      "Oceánico"
+    ]
   },
   "Seoul": {
     "code": "KR",
@@ -2399,11 +2493,15 @@
         "Continental": "Las estaciones son marcadas, abrígate bien en invierno."
       },
       "tipsGeneral": [
-        "Come kimchi, bibimbap y bulgogi.",
-        "Hacer reverencias es una forma común de saludo."
+        "Prueba el bibimbap, un plato de arroz con vegetales y carne.",
+        "Disfruta de un samgyeopsal, la popular barbacoa coreana.",
+        "Al recibir algo, usa ambas manos como señal de respeto.",
+        "No hables en voz alta en el metro; es considerado de mala educación."
       ]
     },
-    "climate": ["Continental"]
+    "climate": [
+      "Continental"
+    ]
   },
   "Bali": {
     "code": "ID",
@@ -2520,11 +2618,15 @@
         "Tropical": "Clima cálido y húmedo, lleva repelente de mosquitos."
       },
       "tipsGeneral": [
-        "Prueba nasi goreng y satay.",
-        "No toques la cabeza de los niños, es un gesto irrespetuoso."
+        "Prueba el babi guling, un cerdo asado típico balinés.",
+        "Disfruta de un nasi goreng, el clásico arroz frito de Indonesia.",
+        "Usa ropa adecuada al visitar templos; cubre los hombros y usa un sarong.",
+        "No toques la cabeza de las personas; se considera una falta de respeto."
       ]
     },
-    "climate": ["Tropical"]
+    "climate": [
+      "Tropical"
+    ]
   },
   "Dubai": {
     "code": "AE",
@@ -2617,13 +2719,19 @@
       "https://i.ytimg.com/vi/YsMrvWgK6V4/sddefault.jpg"
     ],
     "tips": {
-      "tipsClimate": { "Árido": "El calor es extremo en verano." },
+      "tipsClimate": {
+        "Árido": "El calor es extremo en verano."
+      },
       "tipsGeneral": [
-        "Come shawarma y kunafa.",
-        "Vístete de manera respetuosa en lugares públicos."
+        "Prueba el shawarma, una comida rápida tradicional del Medio Oriente.",
+        "No dejes de probar el hummus con pan de pita, un plato clásico árabe.",
+        "En Dubai, es muy importante vestir de manera modesta en lugares públicos.",
+        "La hospitalidad es fundamental en la cultura de Dubai, y siempre se espera un saludo cordial."
       ]
     },
-    "climate": ["Árido"]
+    "climate": [
+      "Árido"
+    ]
   },
   "Beijing": {
     "code": "CN",
@@ -2725,13 +2833,19 @@
       "https://www.chilihousesf.com/wp-content/uploads/2020/07/beiijing-great-wall.jpg"
     ],
     "tips": {
-      "tipsClimate": { "Continental": "Inviernos fríos, veranos calurosos." },
+      "tipsClimate": {
+        "Continental": "Inviernos fríos, veranos calurosos."
+      },
       "tipsGeneral": [
-        "Prueba el pato laqueado y los dumplings.",
-        "Evita discutir temas políticos con los locales."
+        "Prueba el pato laqueado de Pekín en un restaurante especializado.",
+        "Disfruta de unos jianbing, los crepes chinos callejeros.",
+        "Evita hablar de temas políticos en público.",
+        "Lleva papel higiénico; muchos baños públicos no lo tienen."
       ]
     },
-    "climate": ["Continental"]
+    "climate": [
+      "Continental"
+    ]
   },
   "Kuala Lumpur": {
     "code": "MY",
@@ -2832,13 +2946,19 @@
       "https://statemag.state.gov/wp-content/uploads/2024/10/1124pom-22-scaled.jpg"
     ],
     "tips": {
-      "tipsClimate": { "Tropical": "Clima cálido y húmedo." },
+      "tipsClimate": {
+        "Tropical": "Clima cálido y húmedo."
+      },
       "tipsGeneral": [
-        "Prueba el nasi lemak y el rendang.",
-        "Vístete modestamente al visitar mezquitas."
+        "Prueba el nasi lemak, el plato nacional de Malasia.",
+        "Disfruta de un roti canai con curry.",
+        "Respeta las costumbres musulmanas; vístete adecuadamente en sitios religiosos.",
+        "Evita tocar la cabeza de alguien; es un gesto irrespetuoso."
       ]
     },
-    "climate": ["Tropical"]
+    "climate": [
+      "Tropical"
+    ]
   },
   "Rio de Janeiro": {
     "code": "BR",
@@ -2944,13 +3064,19 @@
       "https://karryon.com.au/wp-content/smush-webp/2015/07/post110.jpg"
     ],
     "tips": {
-      "tipsClimate": { "Tropical": "Hace calor todo el año." },
+      "tipsClimate": {
+        "Tropical": "Hace calor todo el año."
+      },
       "tipsGeneral": [
-        "Come feijoada y pão de queijo.",
-        "Evita mostrar objetos de valor en la calle."
+        "Prueba una feijoada, un guiso de frijoles con carne.",
+        "Disfruta de un açaí bowl en la playa.",
+        "No lleves objetos de valor a la playa; el robo es común.",
+        "Saluda con dos besos en la mejilla si te presentan a alguien."
       ]
     },
-    "climate": ["Tropical"]
+    "climate": [
+      "Tropical"
+    ]
   },
   "Buenos Aires": {
     "code": "AR",
@@ -3057,13 +3183,19 @@
       "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjxI1wDS-y4qWYRl1k-tvS9BXNWhD9hjjhOpn561N3Kc6MWZX8gvhtdWQr4Vw6-awXQiMCQ_EbeiWHW0rAufhZCtwb73hHQgfeUdQ12aGCIVwi5gXj54SF93T9ZPJqJT6aN4E22EGmzdWo/w640-h426/20180403_182642.jpg"
     ],
     "tips": {
-      "tipsClimate": { "Templado": "El clima es templado." },
+      "tipsClimate": {
+        "Templado": "El clima es templado."
+      },
       "tipsGeneral": [
-        "Prueba el asado y las empanadas.",
-        "Los saludos con besos en la mejilla son comunes."
+        "Prueba un buen asado argentino en una parrilla local.",
+        "Disfruta de una empanada de carne.",
+        "Evita hablar mal del fútbol; es un tema muy apasionado.",
+        "Saluda con un beso en la mejilla, incluso entre hombres."
       ]
     },
-    "climate": ["Templado"]
+    "climate": [
+      "Templado"
+    ]
   },
   "Lima": {
     "code": "PE",
@@ -3175,11 +3307,15 @@
         "Húmedo Subtropical": "Clima húmedo, incluso en invierno."
       },
       "tipsGeneral": [
-        "Prueba el ceviche y el lomo saltado.",
-        "No bebas agua del grifo, mejor opta por embotellada."
+        "Prueba un ceviche fresco en un restaurante cerca del mar.",
+        "Disfruta de un lomo saltado con papas fritas.",
+        "No tomes agua del grifo; usa agua embotellada.",
+        "Regatea en los mercados, pero con respeto."
       ]
     },
-    "climate": ["Húmedo Subtropical"]
+    "climate": [
+      "Húmedo Subtropical"
+    ]
   },
   "Santiago": {
     "code": "CL",
@@ -3291,11 +3427,15 @@
         "Mediterráneo": "Las estaciones son opuestas a las del hemisferio norte."
       },
       "tipsGeneral": [
-        "Come pastel de choclo y empanadas.",
-        "Evita hablar de política si no conoces bien el contexto."
+        "Prueba una empanada de pino con un buen pebre.",
+        "Disfruta de un completo, el hot dog chileno.",
+        "Evita hablar de política si no conoces bien la historia del país.",
+        "Los chilenos son puntuales en negocios, pero informales en reuniones sociales."
       ]
     },
-    "climate": ["Mediterráneo"]
+    "climate": [
+      "Mediterráneo"
+    ]
   },
   "Cartagena": {
     "code": "CO",
@@ -3394,13 +3534,19 @@
       "https://toursgonewild.com/wp-content/uploads/2021/04/best-time-ctg-weather.jpg"
     ],
     "tips": {
-      "tipsClimate": { "Tropical": "Hace calor y es húmedo todo el año." },
+      "tipsClimate": {
+        "Tropical": "Hace calor y es húmedo todo el año."
+      },
       "tipsGeneral": [
-        "Come la arepa de huevo y el arroz con coco.",
-        "Ten cuidado con los precios en zonas turísticas."
+        "Prueba el arroz con coco y pescado frito.",
+        "Disfruta de una arepa de huevo en un puesto callejero.",
+        "Evita caminar solo de noche en calles poco transitadas.",
+        "Regatea con respeto al comprar en mercados."
       ]
     },
-    "climate": ["Tropical"]
+    "climate": [
+      "Tropical"
+    ]
   },
   "Cape Town": {
     "code": "ZA",
@@ -3516,11 +3662,15 @@
         "Mediterráneo": "El clima es mediterráneo, veranos cálidos e inviernos suaves."
       },
       "tipsGeneral": [
-        "Prueba el bobotie y los vinos locales.",
-        "Evita caminar solo de noche en algunas zonas."
+        "Prueba un braai, la barbacoa sudafricana.",
+        "Disfruta de un bobotie, un pastel de carne con especias.",
+        "No muestres ostentosamente objetos de valor en la calle.",
+        "Saluda con un apretón de manos firme; es señal de respeto."
       ]
     },
-    "climate": ["Mediterráneo"]
+    "climate": [
+      "Mediterráneo"
+    ]
   },
   "Marrakech": {
     "code": "MA",
@@ -3614,13 +3764,19 @@
       "https://media.cntraveller.com/photos/66f2994b7b1eebef3cfdda72/4:3/w_4484,h_3363,c_limit/Marrakech-GettyImages-1145819055.jpg"
     ],
     "tips": {
-      "tipsClimate": { "Árido": "El clima es seco y caluroso." },
+      "tipsClimate": {
+        "Árido": "El clima es seco y caluroso."
+      },
       "tipsGeneral": [
-        "Come tagine y cuscús.",
-        "Regatea en los mercados, es parte de la cultura."
+        "Prueba un tagine de cordero con ciruelas.",
+        "Disfruta de un té de menta en un café tradicional.",
+        "Negocia los precios en los zocos; es parte de la cultura.",
+        "Vístete con ropa modesta para respetar la cultura local."
       ]
     },
-    "climate": ["Árido"]
+    "climate": [
+      "Árido"
+    ]
   },
   "Cairo": {
     "code": "EG",
@@ -3722,13 +3878,19 @@
       "https://www.calloftheworld.com/wp-content/uploads/2024/07/5-2-819x1024.jpg"
     ],
     "tips": {
-      "tipsClimate": { "Árido": "Hace calor casi todo el año." },
+      "tipsClimate": {
+        "Árido": "Hace calor casi todo el año."
+      },
       "tipsGeneral": [
-        "Come koshari y ful medames.",
-        "Vístete de manera respetuosa en sitios religiosos."
+        "Prueba un koshari, un plato de arroz, lentejas y pasta.",
+        "Disfruta de un falafel egipcio con tahini.",
+        "No bebas agua del grifo; opta por agua embotellada.",
+        "Pide permiso antes de tomar fotos a locales o militares."
       ]
     },
-    "climate": ["Árido"]
+    "climate": [
+      "Árido"
+    ]
   },
   "Zanzibar": {
     "code": "TZ",
@@ -3828,13 +3990,19 @@
       "https://www.focuseastafricatours.com/wp-content/uploads/zanzibar-stone-town.jpg"
     ],
     "tips": {
-      "tipsClimate": { "Tropical": "Clima tropical, lleva ropa ligera." },
+      "tipsClimate": {
+        "Tropical": "Clima tropical, lleva ropa ligera."
+      },
       "tipsGeneral": [
-        "Come mariscos frescos.",
-        "Disfruta de las playas y evita tocar los corales."
+        "Prueba un plato de mariscos frescos en la playa.",
+        "Disfruta de un pilau de especias.",
+        "Usa ropa adecuada en pueblos y mezquitas; es una sociedad conservadora.",
+        "Negocia los precios en los mercados locales."
       ]
     },
-    "climate": ["Tropical"]
+    "climate": [
+      "Tropical"
+    ]
   },
   "Victoria Falls": {
     "code": "ZW",
@@ -3934,11 +4102,15 @@
         "Tropical": "Es recomendable visitar durante la temporada seca (mayo a octubre) para ver las cataratas en su máximo esplendor."
       },
       "tipsGeneral": [
-        "Lleva ropa ligera pero resistente y no olvides un impermeable.",
-        "Haz un safari para ver la fauna africana cercana."
+        "Prueba una carne de caza como el kudu o avestruz.",
+        "Disfruta de un biltong, la cecina africana.",
+        "Lleva dólares estadounidenses en efectivo; muchas transacciones se hacen en USD.",
+        "Respeta la vida silvestre y sigue las reglas en los safaris."
       ]
     },
-    "climate": ["Tropical"]
+    "climate": [
+      "Tropical"
+    ]
   },
   "Sydney": {
     "code": "AU",
@@ -4055,11 +4227,16 @@
         "Subártico": "En las montañas cercanas, el clima puede ser más frío."
       },
       "tipsGeneral": [
-        "Visita la Ópera de Sydney y la playa Bondi.",
-        "Recuerda que el sol es fuerte, usa protector solar."
+        "Comida: Prueba el meat pie, una empanada de carne muy popular en Australia.",
+        "Comida: Disfruta de un barramundi a la parrilla, un pescado típico de la región.",
+        "Costumbres: Usa protector solar y respeta las normas de seguridad en la playa.",
+        "Costumbres: En los bares, es común comprar rondas de bebidas para el grupo."
       ]
     },
-    "climate": ["Oceánico", "Subártico"]
+    "climate": [
+      "Oceánico",
+      "Subártico"
+    ]
   },
   "Melbourne": {
     "code": "AU",
@@ -4158,11 +4335,15 @@
         "Oceánico": "Temperaturas moderadas, pero el clima puede cambiar rápidamente, lleva ropa para capas."
       },
       "tipsGeneral": [
-        "Prueba el café y el arte callejero de Melbourne.",
-        "Es una ciudad culturalmente diversa, respeta sus múltiples costumbres."
+        "Prueba una meat pie en una panadería local.",
+        "Disfruta de un café en uno de los famosos cafés de la ciudad.",
+        "Respeta las colas en el transporte público.",
+        "El clima cambia rápidamente; lleva ropa en capas."
       ]
     },
-    "climate": ["Oceánico"]
+    "climate": [
+      "Oceánico"
+    ]
   },
   "Auckland": {
     "code": "NZ",
@@ -4268,11 +4449,16 @@
         "Húmedo Subtropical": "En verano, la humedad puede ser alta."
       },
       "tipsGeneral": [
-        "Disfruta de los paisajes de la isla norte y haz un tour por la zona vinícola.",
-        "Ten cuidado con el sol, ya que es muy fuerte durante el verano."
+        "Prueba un fish and chips en la costa.",
+        "Disfruta de un hangi, un plato tradicional maorí cocido bajo tierra.",
+        "Saluda con un 'Kia ora'; es una forma amigable y respetuosa.",
+        "Quítate los zapatos al entrar en casas maoríes."
       ]
     },
-    "climate": ["Oceánico", "Húmedo Subtropical"]
+    "climate": [
+      "Oceánico",
+      "Húmedo Subtropical"
+    ]
   },
   "Fiji Islands": {
     "code": "FJ",
@@ -4373,10 +4559,14 @@
         "Tropical": "El clima cálido y húmedo es ideal para visitar entre mayo y octubre, evitando la temporada de ciclones."
       },
       "tipsGeneral": [
-        "Disfruta de las playas de arena blanca y las aguas cristalinas.",
-        "Respeta la cultura local, ya que los fiyianos son muy tradicionales."
+        "Prueba un kokoda, un ceviche de pescado con coco.",
+        "Disfruta de un lovo, una comida cocida bajo tierra.",
+        "Saluda con un ‘Bula!’ a los locales; es muy apreciado.",
+        "Evita tocar la cabeza de alguien; es un gesto de falta de respeto."
       ]
     },
-    "climate": ["Tropical"]
+    "climate": [
+      "Tropical"
+    ]
   }
 }

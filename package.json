@@ -22,5 +22,8 @@
   },
   "author": "DEPREMU",
   "license": "ISC",
-  "type": "module"
+  "type": "module",
+  "devDependencies": {
+    "typedoc": "^0.27.9"
+  }
 }

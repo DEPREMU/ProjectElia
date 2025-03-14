@@ -43,7 +43,18 @@ document.addEventListener("DOMContentLoaded", () => {
   handleFilterContainer();
 });
 
-const listeners = () => {
+/**
+ * Initializes event listeners for various elements on the page.
+ *
+ * - Sets up input elements for search, country code, date range, budget, travel type, accommodation, rating, and continent.
+ * - Adds scroll and resize event listeners to handle UI adjustments.
+ * - Adds click event listener to hide the filter container when clicking outside of it.
+ * - Adds focus and blur event listeners to the search input to handle label animations.
+ * - Adds keyup event listener to the search input to filter data based on the input value.
+ * - Adds change event listeners to various input elements to trigger data filtering.
+ * - Adds click event listener to the filter container toggle button to show or hide the filter container.
+ */
+const listeners = (): void => {
   input = document.getElementById("search") as HTMLInputElement;
   label = document.getElementById("labelSearch") as HTMLLabelElement;
   countryCode = document.getElementById("countryCode") as HTMLInputElement;
@@ -156,7 +167,28 @@ const listeners = () => {
   });
 };
 
-const filterData = async (search: string | null = null) => {
+/**
+ * Filters data based on the provided search criteria and updates the UI with the filtered results.
+ *
+ * @param {string | null} [search=null] - The search term to filter the data. If null, the value from the input field is used.
+ * @returns {Promise<void>} - A promise that resolves when the data has been filtered and rendered.
+ *
+ * The function sends a POST request to the "/getTrips" endpoint with the following parameters:
+ * - `destination`: The search term or input value.
+ * - `countryCode`: The selected country code or null.
+ * - `startDate`: The selected start date or null.
+ * - `endDate`: The selected end date or null.
+ * - `minBudget`: The minimum budget or -1 if not specified.
+ * - `maxBudget`: The maximum budget or -1 if not specified.
+ * - `travelType`: The selected travel type or null.
+ * - `accommodation`: The selected accommodation type or null.
+ * - `rating`: The selected rating (0-5) or null if not within the range.
+ * - `continent`: The selected continent or null.
+ *
+ * The response is expected to be in JSON format and contain a `data` field which is an array or a single object.
+ * The filtered data is then sliced based on the current page and items per page, and rendered to the UI.
+ */
+const filterData = async (search: string | null = null): Promise<void> => {
   filteredData = await fetch("/getTrips", {
     method: "POST",
     headers: {
@@ -189,7 +221,17 @@ const filterData = async (search: string | null = null) => {
   await renderData(filteredData.slice(0, currentPage * itemsPerPage), true);
 };
 
-const handleFilterContainer = async () => {
+/**
+ * Handles the display and positioning of the filter container.
+ *
+ * This function adjusts the top position and height of the filter container
+ * based on the height of the navigation bar. It also ensures that the filter
+ * container is hidden on smaller screens (width less than 768px) and displays
+ * the button to hide the filter container.
+ *
+ * @returns {Promise<void>} A promise that resolves when the function completes.
+ */
+const handleFilterContainer = async (): Promise<void> => {
   const heightNavBar = navBar.offsetHeight;
   if (window.innerWidth < 768) showFilterContainer(false);
 
@@ -198,7 +240,14 @@ const handleFilterContainer = async () => {
   btnHideFilterContainer.style.display = "block";
 };
 
-const showFilterContainer = (show: boolean) => {
+/**
+ * Toggles the visibility of the filter container and updates the button's rotation.
+ *
+ * @param show - A boolean indicating whether to show or hide the filter container.
+ *               If true, the filter container is shown and the button is rotated to 180 degrees.
+ *               If false, the filter container is hidden and the button is rotated to 0 degrees.
+ */
+const showFilterContainer = (show: boolean): void => {
   if (show) {
     filterContainer?.classList.remove("hideFilterContainer");
     filterContainer?.classList.add("showFilterContainer");
@@ -212,6 +261,21 @@ const showFilterContainer = (show: boolean) => {
   filterContainer?.classList.remove("showFilterContainer");
 };
 
+/**
+ * Determines if any of the filtering criteria are set.
+ *
+ * @returns {boolean} - Returns `true` if any of the following conditions are met:
+ * - The input value length is greater than 2.
+ * - The country code is set.
+ * - The start date is set.
+ * - The end date is set.
+ * - The minimum budget is set.
+ * - The maximum budget is set.
+ * - The travel type is selected.
+ * - The accommodation type is selected.
+ * - The rating is set and greater than -1.
+ * - The continent is set.
+ */
 const isFiltering = (): boolean => {
   return (
     input?.value.length > 2 ||

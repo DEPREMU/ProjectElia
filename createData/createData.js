@@ -1,5 +1,5 @@
 import fs from "fs";
-import { supabase } from "../dist/supabaseClient.js";
+import { supabase } from "../server/supabaseClient.ts";
 import { getSeason } from "./getSeason.js";
 import { log } from "console";
 
@@ -65,14 +65,15 @@ const getBudget = (travelType, budget = 0) => {
   }
 };
 
-let tripsInserted =
+let lenTable =
   (await supabase
     .from("trips")
     .select("*")
     .then((data) => data.data.length)) || 0;
+let tripsInserted = lenTable;
 
 // Create random trips
-for (let i = 0; i < 500; i++) {
+for (let i = 0; i < 1200; i++) {
   const destinationKeys = Object.keys(destination);
   const destinationKey =
     destinationKeys[Math.floor(Math.random() * destinationKeys.length)];
@@ -132,4 +133,7 @@ for (let i = 0; i < 500; i++) {
   else tripsInserted++;
 }
 
-console.log("Length table:", tripsInserted);
+console.log(
+  `New length table: ${tripsInserted}`,
+  `\nOld length table: ${lenTable}`
+);
