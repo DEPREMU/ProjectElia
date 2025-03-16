@@ -66,8 +66,13 @@
 
 .btnHideFilterContainer {
   position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   z-index: 20;
-  top: 430px;
+  top: 0;
+  background-color: var(--primary);
+  height: 100vh;
   left: 0;
 }
 
@@ -113,12 +118,12 @@ body {
   padding: 16px 24px;
   background-color: var(--primary);
   width: 100%;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   position: sticky;
   top: 0;
   z-index: 100;
   gap: 10px;
   flex-wrap: wrap;
+  overflow-x: hidden;
 }
 
 .logoImage {
@@ -154,6 +159,16 @@ button {
   border: none;
 }
 
+.divSearch {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  width: 50%;
+  max-width: 400px;
+  transition: all var(--animation-duration) ease;
+}
+
 .searchBar {
   display: flex;
   justify-content: center;
@@ -167,20 +182,8 @@ button {
   font-size: medium;
   width: 50%;
   min-width: 300px;
-
   overflow-x: scroll;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.searchBar::before {
-  content: "Search";
-  display: block;
-  position: relative;
-  top: 0;
-  left: 0;
-  z-index: 100;
-  width: 100%;
-  height: 100%;
 }
 
 .searchBar:focus {
@@ -210,15 +213,6 @@ label:hover {
   animation: labelAnimationBW var(--animation-duration) ease forwards;
 }
 
-.divSearch {
-  display: flex;
-  flex: 1;
-  align-items: center;
-  justify-content: center;
-  width: 50%;
-  max-width: 400px;
-}
-
 /* Cards */
 .cardsContainer {
   display: flex;
@@ -242,7 +236,7 @@ label:hover {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   overflow: hidden;
   font-family: "Arial", sans-serif;
-  background-color: var(--surface);
+  background-color: rgba(var(--surface-rgb), 0.5);
   margin: 20px auto;
   transition: all 0.3s ease;
   cursor: pointer;
@@ -277,7 +271,6 @@ label:hover {
   border-radius: 12px;
   max-height: 200px;
   object-fit: cover;
-  border-bottom: 5px solid var(--outline);
 }
 
 .H2Destination {

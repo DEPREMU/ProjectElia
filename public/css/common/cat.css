@@ -1,0 +1,30 @@
+#cat {
+  position: absolute;
+  z-index: 10;
+  width: 230px;
+  height: calc(855px / 12);
+  background: url("../../assets/image.png");
+  animation: cat-sprite 1s steps(12) infinite, cat-walk 30s infinite;
+}
+
+.mirror {
+  transform: scaleX(-1);
+}
+
+@keyframes cat-sprite {
+  from {
+    background-position: 0 0px;
+  }
+  to {
+    background-position: 0 -855px;
+  }
+}
+
+@keyframes cat-walk {
+  0% {
+    transform: translateX(-50vw) scaleX(-1);
+  }
+  100% {
+    transform: translateX(150vw) scaleX(-1);
+  }
+}

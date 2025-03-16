@@ -248,15 +248,17 @@ const handleFilterContainer = async (): Promise<void> => {
  *               If false, the filter container is hidden and the button is rotated to 0 degrees.
  */
 const showFilterContainer = (show: boolean): void => {
+  const width = btnHideFilterContainer?.offsetWidth;
   if (show) {
+    btnHideFilterContainer.style.left = `-${width}px`;
     filterContainer?.classList.remove("hideFilterContainer");
     filterContainer?.classList.add("showFilterContainer");
-    btnHideFilterContainer.classList.remove("rotate0deg");
-    btnHideFilterContainer.classList.add("rotate180deg");
     return;
   }
-  btnHideFilterContainer.classList.add("rotate0deg");
-  btnHideFilterContainer.classList.remove("rotate180deg");
+  btnHideFilterContainer.style.left = `0px`;
+  setTimeout(()=>{
+    btnHideFilterContainer.style.display = "block";
+  },1000)
   filterContainer?.classList.add("hideFilterContainer");
   filterContainer?.classList.remove("showFilterContainer");
 };

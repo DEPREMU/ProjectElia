@@ -5,13 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Trips</title>
     <link rel="icon" href="assets/logo.png" />
+    <link rel="stylesheet" href="css/common//stars.css" />
     <link rel="stylesheet" href="css/common/colors.css" />
     <link rel="stylesheet" href="css/index/index.css" />
     <link rel="stylesheet" href="css/skeletons/indexSkeleton.css" />
+    <link rel="stylesheet" href="css/common/cat.css" />
   </head>
   <body>
+    <div class="stars-container" id="stars-container">
+      <div class="star"></div>
+      <div class="star"></div>
+      <div class="star"></div>
+      <div class="star"></div>
+      <div class="star"></div>
+      <div class="star"></div>
+      <div class="star"></div>
+    </div>
     <div class="parent">
       <nav class="navBar" id="navBar">
+        <!-- Licence 
+         https://favpng.com/png_view/cat-cat-walk-cycle-animated-film-drawing-sprite-png/ShW0zcQe 
+         By jasonivan. Thanks for this sprite-->
+        <div id="cat"></div>
+
         <button class="logo">
           <img src="assets/logo.png" alt="logo" class="logoImage" />
           Perfect Destination
@@ -141,6 +157,7 @@
         <div class="cardsContainer" id="loading">{{cardsSkeletonLoading}}</div>
       </div>
     </div>
+    <script src="scripts/common/stars.js" defer></script>
     <script src="scripts/index/listeners.js" defer></script>
     <script src="scripts/index/index.js"></script>
   </body>

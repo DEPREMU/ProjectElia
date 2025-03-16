@@ -25,7 +25,7 @@ app.use(express.json());
  * The port number on which the server will listen.
  * @type {number}
  */
-export let port: number = 3000;
+export let port: number = 3001;
 /**
  * The hostname for the server.
  *
@@ -138,32 +138,49 @@ app.post("/getTrips", async (req: express.Request, res: any) => {
     return res.status(500).json({ data: null, error: error?.message });
 
   for (const filter of filters) {
-    if (!body[filter]) continue;
+    if (
+      !body[filter] ||
+      (["maxBudget", "minBudget"].includes(filter) &&
+        Number(body[filter]) === -1)
+    )
+      continue;
 
     console.log(`Filtering by ${filter}:`, body[filter]);
-    if (filter === "destination") {
-      data = data.filter((trip: TripType) =>
-        boolIsInTrip(trip, body[filter] as string)
-      );
-    } else if (filter === "startDate" || filter === "endDate") {
-      data = data.filter((trip: TripType) => {
-        const date = new Date(body[filter] as string);
-        const tripDate = new Date(trip[filter]);
-        return (
-          tripDate.toISOString().split("T")[0] ===
-          date.toISOString().split("T")[0]
+    switch (filter) {
+      case "destination":
+        data = data.filter((trip: TripType) =>
+          boolIsInTrip(trip, body[filter] as string)
         );
-      });
-    } else if (filter === "maxBudget") {
-      data = data.filter(
-        (trip: TripType) => trip.budget <= Number(body[filter])
-      );
-    } else if (filter === "minBudget") {
-      data = data.filter(
-        (trip: TripType) => trip.budget >= Number(body[filter])
-      );
-    } else {
-      data = data.filter((trip: TripType) => trip[filter] === body[filter]);
+        break;
+      case "startDate":
+      case "endDate":
+        data = data.filter((trip: TripType) => {
+          const date = new Date(body[filter] as string);
+          const tripDate = new Date(trip[filter]);
+          return (
+            tripDate.toISOString().split("T")[0] ===
+            date.toISOString().split("T")[0]
+          );
+        });
+        break;
+      case "maxBudget":
+        data = data.filter(
+          (trip: TripType) => trip.budget <= Number(body[filter])
+        );
+        break;
+      case "minBudget":
+        console.log("Min budget:", body[filter]);
+        data = data.filter(
+          (trip: TripType) => trip.budget >= Number(body[filter])
+        );
+        break;
+      default:
+        data = data.filter(
+          (trip: TripType) =>
+            trip[filter]?.toString().toLowerCase() ===
+            body[filter]?.toString().toLowerCase()
+        );
+        break;
     }
   }
 
