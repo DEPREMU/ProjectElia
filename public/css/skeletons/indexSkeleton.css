@@ -1,7 +1,3 @@
-* {
-  box-sizing: border-box;
-}
-
 .card {
   height: auto;
 }
@@ -94,5 +90,12 @@
 @media (max-width: 768px) {
   .posAbsolute {
     top: 150px;
+  }
+  .card {
+    height: auto;
+    min-width: 90%;
+  }
+  .cardBody {
+    width: 100%;
   }
 }

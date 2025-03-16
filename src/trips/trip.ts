@@ -27,6 +27,8 @@ document.addEventListener("DOMContentLoaded", () => {
   html = document.querySelector("html") as HTMLHtmlElement;
   mainLoaded = document.getElementById("loaded") as HTMLElement;
   mainLoading = document.getElementById("loading") as HTMLElement;
+  tripCardDiv = document.getElementById("tripCard") as HTMLDivElement;
+  iframeMap = document.getElementById("iframeMap") as HTMLElement;
 
   fetch(`/getTrips`, {
     method: "POST",
@@ -182,6 +184,8 @@ const renderTrip = async (trip: TripType): Promise<void> => {
     mainLoading.classList.add("fadeOut");
     setTimeout(() => {
       mainLoading.remove();
+      tripCardDiv = document.getElementById("tripCard") as HTMLDivElement;
+      iframeMap = document.getElementById("iframeMap") as HTMLElement;
     }, 1000);
   }, 2000);
 };
@@ -241,13 +245,9 @@ const showImageLarge = (id: string): void => {
  * and have the IDs "tripCard" and "iframeMap", respectively.
  */
 const resizeIframe = (): void => {
-  if (!tripCardDiv)
-    tripCardDiv = document.getElementById("tripCard") as HTMLDivElement;
-  if (!iframeMap) iframeMap = document.getElementById("iframeMap");
-
   if (!tripCardDiv || !iframeMap) return;
 
-  let heightTripCard: number = tripCardDiv.offsetHeight;
+  let heightTripCard: number = tripCardDiv.offsetHeight || 800;
   if (window.innerWidth < 768) heightTripCard = 600;
   iframeMap.style.height = `${heightTripCard}px`;
 };
